@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/screens/home_page.dart';
 import 'package:meesho_dice/screens/home_screen.dart';
 import 'package:meesho_dice/services/theme.dart';
 
@@ -14,8 +15,9 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
       theme: AppTheme().lightTheme(),
-      home: const HomeScreen(),
+      home: const HomePage(),
     );
   }
 }
