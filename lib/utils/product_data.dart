@@ -9,6 +9,8 @@ List<Map<String, dynamic>> productData = [
     "rating": 3.8,
     "no_of_feedbacks": 4820,
     "size": "Free Size",
+    "no_of_special_offers": 1,
+    "special_offer_price": 55,
     "category": "electronics",
     "seller_details": {
       "name": "Tirth Enterprise",

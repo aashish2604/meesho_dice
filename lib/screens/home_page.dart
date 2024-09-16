@@ -34,7 +34,7 @@ class _HomePageState extends State<HomePage> {
         preferredSize: Size.fromHeight(136.0),
         child: AppBar(
           title: HomeAppbarLeading(userName: "userName"),
-          actions: HomeAppbarTrailing().getAppBarACtions(),
+          actions: HomeAppbarTrailing().getAppBarActions(context),
           bottom: PreferredSize(
               preferredSize: Size.fromHeight(12),
               child: Padding(

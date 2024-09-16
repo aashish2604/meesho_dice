@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/screens/social_area.dart';
 
 class HomeAppbarLeading extends StatelessWidget {
   final String userName;
@@ -33,8 +34,18 @@ class HomeAppbarLeading extends StatelessWidget {
 }
 
 class HomeAppbarTrailing {
-  List<Widget> getAppBarACtions() {
+  List<Widget> getAppBarActions(BuildContext context) {
     return [
+      IconButton(
+        onPressed: () {
+          Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const SocialArea()));
+        },
+        icon: const Icon(
+          Icons.alarm,
+          color: Colors.blue,
+        ),
+      ),
       IconButton(
         onPressed: () {},
         icon: const Icon(
