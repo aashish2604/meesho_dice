@@ -39,7 +39,7 @@ class PolicyContainer extends StatelessWidget {
       width: double.infinity,
       height: 100,
       color: const Color.fromARGB(224, 242, 147, 255).withOpacity(0.3),
-      padding: EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(12.0),

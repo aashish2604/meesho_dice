@@ -76,14 +76,24 @@ class HomeAppbarSearch extends StatelessWidget {
         padding: const EdgeInsets.all(8.0),
         child: TextField(
           decoration: InputDecoration(
+            contentPadding: const EdgeInsets.all(0),
             hintText: 'Search...',
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(30.0),
-              borderSide: BorderSide.none,
-            ),
+            hintStyle:
+                TextStyle(color: Colors.grey, fontWeight: FontWeight.w400),
             fillColor: Colors.white,
             filled: true,
-            prefixIcon: Icon(Icons.search),
+            prefixIcon: Icon(
+              Icons.search,
+              color: Colors.grey,
+            ),
+            enabledBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            focusedBorder: OutlineInputBorder(
+              borderSide: BorderSide(color: Colors.grey, width: 1),
+              borderRadius: BorderRadius.circular(16.0),
+            ),
           ),
         ));
   }

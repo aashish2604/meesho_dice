@@ -19,11 +19,14 @@ const Color kMeeshoPurple = Colors.purple;
 const TextStyle bodyTextStyle =
     TextStyle(fontSize: 10.0, fontWeight: FontWeight.w500);
 
+const TextStyle appBarTextStyle =
+    TextStyle(fontSize: 18, fontWeight: FontWeight.w800);
+
 class AppTheme {
   ThemeData lightTheme() {
     return ThemeData(
         cardTheme: CardTheme(color: Colors.white),
-        appBarTheme: AppBarTheme(backgroundColor: Colors.white),
+        appBarTheme: AppBarTheme(color: Colors.white),
         scaffoldBackgroundColor: kCatsKillWhiteColor,
         colorScheme:
             ColorScheme.fromSeed(seedColor: Colors.deepPurple.shade700),

@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/services/general_functions.dart';
 import 'package:meesho_dice/widgets/circular_iconbutton.dart';
 import 'package:meesho_dice/widgets/image_carousal.dart';
+import 'package:meesho_dice/widgets/loading.dart';
 import 'package:meesho_dice/widgets/product_box.dart';
 
 class ProductDetails extends StatelessWidget {
@@ -10,6 +13,14 @@ class ProductDetails extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    void addProductToGroupChat() {
+      showModalBottomSheet(
+          context: context,
+          builder: (context) {
+            return SocialGroupBottomsheet(details: details);
+          });
+    }
+
     final screenHeight = MediaQuery.of(context).size.height;
     final screenWidth = MediaQuery.of(context).size.width;
     return Scaffold(
@@ -28,7 +39,7 @@ class ProductDetails extends StatelessWidget {
                         CarouselWithIndicatorDemo(imageUrls: details["images"]),
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 20,
                   ),
                   Row(
                     children: [
@@ -61,27 +72,39 @@ class ProductDetails extends StatelessWidget {
                               ],
                             ),
                             const SizedBox(
-                              height: 20.0,
+                              height: 8.0,
                             ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                RatingBox(rating: details["rating"].toDouble()),
-                                const SizedBox(
-                                  width: 8.0,
-                                ),
-                                Text(
-                                  "(${GeneralFunctions().formatIndianNumber(details["no_of_feedbacks"].toString())})",
-                                  style: const TextStyle(
-                                      color: Colors.grey, fontSize: 12),
-                                )
-                              ],
-                            )
+                            TextButton.icon(
+                                style: TextButton.styleFrom(
+                                    backgroundColor: Colors.purple,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(4))),
+                                onPressed: () {
+                                  addProductToGroupChat();
+                                },
+                                label: const Wrap(
+                                  crossAxisAlignment: WrapCrossAlignment.center,
+                                  children: [
+                                    Icon(
+                                      Icons.chat_outlined,
+                                      color: Colors.white,
+                                    ),
+                                    SizedBox(
+                                      width: 8.0,
+                                    ),
+                                    Text(
+                                      "Add to group chat",
+                                      style: TextStyle(
+                                          color: Colors.white, fontSize: 10),
+                                    )
+                                  ],
+                                ))
                           ],
                         ),
                       ),
                       const SizedBox(
-                        width: 30,
+                        width: 20,
                       )
                     ],
                   ),
@@ -160,6 +183,21 @@ class ProductDetails extends StatelessWidget {
                               color: Colors.green.shade800,
                               fontSize: 14,
                               fontWeight: FontWeight.w500),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            RatingBox(rating: details["rating"].toDouble()),
+                            const SizedBox(
+                              width: 8.0,
+                            ),
+                            Text(
+                              "(${GeneralFunctions().formatIndianNumber(details["no_of_feedbacks"].toString())})",
+                              style: const TextStyle(
+                                  color: Colors.grey, fontSize: 12),
+                            )
+                          ],
                         ),
                         const SizedBox(
                           height: 100,
@@ -286,8 +324,8 @@ class BottomButtonBox extends StatelessWidget {
           child: OutlinedButton(
               onPressed: () {},
               style: OutlinedButton.styleFrom(
+                  side: BorderSide(color: Colors.purple),
                   shape: RoundedRectangleBorder(
-                      side: BorderSide(color: Colors.purple),
                       borderRadius: BorderRadius.circular(4))),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
@@ -328,6 +366,77 @@ class BottomButtonBox extends StatelessWidget {
               )),
         )
       ],
+    );
+  }
+}
+
+class SocialGroupBottomsheet extends StatefulWidget {
+  final Map<String, dynamic> details;
+  const SocialGroupBottomsheet({super.key, required this.details});
+
+  @override
+  State<SocialGroupBottomsheet> createState() => _SocialGroupBottomsheetState();
+}
+
+class _SocialGroupBottomsheetState extends State<SocialGroupBottomsheet> {
+  bool isLoading = false;
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
+      child: isLoading
+          ? LoadingWidget()
+          : ListView(
+              shrinkWrap: true,
+              children: [
+                Text(
+                  "Groups",
+                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+                ),
+                SizedBox(
+                  height: 16.0,
+                ),
+                Text(
+                  "Tap the group in which you wish to share this product",
+                  style: TextStyle(fontSize: 12.0),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
+                Card(
+                  child: ListTile(
+                    onTap: () async {
+                      setState(() {
+                        isLoading = true;
+                      });
+                      await FirebaseServices.uploadProductToChat(
+                          widget.details["id"],
+                          "fbSH5sqoREa1ZdpK0ShRUUct0mh2",
+                          "product",
+                          "yT2Q2ospLIF09ggC0O74");
+                      setState(() {
+                        isLoading = false;
+                      });
+                      if (!mounted) return;
+                      Navigator.of(context).pop();
+                      Fluttertoast.showToast(msg: "Product added to chat");
+                    },
+                    title: Text("code_squad"),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    onTap: () async {
+                      Navigator.of(context).pop();
+                    },
+                    title: Text("Chillers"),
+                  ),
+                ),
+                const SizedBox(
+                  height: 10.0,
+                )
+              ],
+            ),
     );
   }
 }

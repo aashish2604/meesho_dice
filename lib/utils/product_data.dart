@@ -1,7 +1,7 @@
 List<Map<String, dynamic>> productData = [
   {
     "id": 1,
-    "title_name": "WHITE BLAZER",
+    "title_name": "White Blazer",
     "descriptive_name":
         "GARBY CLUB WHITE colorblocked regular fit Blazer for men",
     "price": 7800,
