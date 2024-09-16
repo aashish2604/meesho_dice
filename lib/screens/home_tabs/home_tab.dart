@@ -10,24 +10,23 @@ class HomeTab extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        backgroundColor: Color.fromARGB(255, 248, 237, 252),
         body: SingleChildScrollView(
-          child: Column(
-            children: [
-              PolicyContainer(),
-              CategorySection(),
-              OfferCarousal(),
-              const SizedBox(
-                height: 6,
-              ),
-              ProductsForYouHeader(),
-              const SizedBox(
-                height: 6.0,
-              ),
-              ProductsForYouBody()
-            ],
+      child: Column(
+        children: [
+          PolicyContainer(),
+          CategorySection(),
+          OfferCarousal(),
+          const SizedBox(
+            height: 6,
           ),
-        ));
+          ProductsForYouHeader(),
+          const SizedBox(
+            height: 6.0,
+          ),
+          ProductsForYouBody()
+        ],
+      ),
+    ));
   }
 }
 

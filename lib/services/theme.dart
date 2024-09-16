@@ -22,6 +22,7 @@ const TextStyle bodyTextStyle =
 class AppTheme {
   ThemeData lightTheme() {
     return ThemeData(
+        cardTheme: CardTheme(color: Colors.white),
         appBarTheme: AppBarTheme(backgroundColor: Colors.white),
         scaffoldBackgroundColor: kCatsKillWhiteColor,
         colorScheme:

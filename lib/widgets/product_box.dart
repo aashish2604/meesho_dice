@@ -19,6 +19,7 @@ class ProductBox extends StatelessWidget {
         children: [
           SizedBox(
             height: 200,
+            width: double.infinity,
             child: CachedNetworkImage(
               imageUrl: details["images"][0],
               fit: BoxFit.fill,
@@ -83,7 +84,7 @@ class ProductBox extends StatelessWidget {
                 ),
                 Row(
                   children: [
-                    RatingBox(rating: details["rating"]),
+                    RatingBox(rating: details["rating"].toDouble()),
                     const SizedBox(
                       width: 4.0,
                     ),

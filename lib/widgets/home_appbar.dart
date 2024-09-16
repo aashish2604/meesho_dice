@@ -42,7 +42,7 @@ class HomeAppbarTrailing {
               MaterialPageRoute(builder: (context) => const SocialArea()));
         },
         icon: const Icon(
-          Icons.alarm,
+          Icons.group,
           color: Colors.blue,
         ),
       ),

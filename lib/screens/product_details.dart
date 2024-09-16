@@ -66,7 +66,7 @@ class ProductDetails extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                RatingBox(rating: details["rating"]),
+                                RatingBox(rating: details["rating"].toDouble()),
                                 const SizedBox(
                                   width: 8.0,
                                 ),

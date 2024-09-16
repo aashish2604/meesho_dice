@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/screens/games.dart';
 
 class SocialArea extends StatelessWidget {
   const SocialArea({super.key});
@@ -7,20 +9,46 @@ class SocialArea extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: const Wrap(
+          crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             CircleAvatar(
-              radius: 16.0,
+              radius: 20.0,
             ),
             const SizedBox(
-              width: 4.0,
+              width: 12.0,
             ),
-            Text("data")
+            Text(
+              "group_name",
+              style: TextStyle(fontSize: 16, overflow: TextOverflow.ellipsis),
+            )
           ],
         ),
+        actions: [
+          IconButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const GamesScreen()));
+              },
+              icon: Icon(
+                Icons.videogame_asset_outlined,
+                color: Colors.green,
+                size: 30,
+              )),
+          IconButton(
+              onPressed: () {},
+              icon: Icon(
+                Icons.add_shopping_cart_sharp,
+                color: Colors.purple,
+                size: 30.0,
+              )),
+          const SizedBox(
+            width: 20.0,
+          )
+        ],
       ),
       body: Column(
-        children: [Text("sometih")],
+        children: [Text("something")],
       ),
     );
   }

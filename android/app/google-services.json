@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "445595029659",
+    "project_id": "meesho-dice-9bfa9",
+    "storage_bucket": "meesho-dice-9bfa9.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:445595029659:android:eaca0cfb735a13b093b63e",
+        "android_client_info": {
+          "package_name": "com.example.meesho_dice"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBULXJ7eFITOFfwOQYM0eDdp9-WaAU799o"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
