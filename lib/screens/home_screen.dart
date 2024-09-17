@@ -54,8 +54,11 @@ class _HomeScreenState extends State<HomeScreen> {
         ],
       ),
       floatingActionButton: FloatingActionButton(onPressed: () {
-        Navigator.of(context).push(
-            MaterialPageRoute(builder: (context) => const Model3dViewer()));
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => const Model3dViewer(
+                modelUrl:
+                    "https://cdn.tinyglb.com/models/17fbc4482a0e4ae78c6431fb94fc1643.glb",
+                modelTitle: "Phone")));
       }),
     );
   }

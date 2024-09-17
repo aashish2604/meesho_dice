@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:meesho_dice/screens/social_area.dart';
+import 'package:meesho_dice/screens/social/groups_list.dart';
+import 'package:meesho_dice/screens/social/social_area.dart';
 
 class HomeAppbarLeading extends StatelessWidget {
   final String userName;
@@ -39,10 +40,11 @@ class HomeAppbarTrailing {
       IconButton(
         onPressed: () {
           Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const SocialArea()));
+              MaterialPageRoute(builder: (context) => const SocialGroupList()));
         },
         icon: const Icon(
           Icons.group,
+          size: 28,
           color: Colors.blue,
         ),
       ),

@@ -251,7 +251,7 @@ class ProductMessageBoxMe extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.remove_red_eye_outlined,
-                              color: Colors.black,
+                              color: Colors.purple,
                             ),
                             const SizedBox(
                               width: 6,
@@ -259,7 +259,7 @@ class ProductMessageBoxMe extends StatelessWidget {
                             Text(
                               "View Details",
                               style:
-                                  TextStyle(color: Colors.black, fontSize: 12),
+                                  TextStyle(color: Colors.purple, fontSize: 12),
                             )
                           ],
                         ))

@@ -2,7 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
-import 'package:meesho_dice/screens/games.dart';
+import 'package:meesho_dice/screens/social/games.dart';
+import 'package:meesho_dice/screens/social/group_cart.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/message.dart';
 
@@ -28,6 +29,7 @@ class _SocialAreaState extends State<SocialArea> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        scrolledUnderElevation: 0,
         title: const Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
@@ -55,7 +57,10 @@ class _SocialAreaState extends State<SocialArea> {
                 size: 30,
               )),
           IconButton(
-              onPressed: () {},
+              onPressed: () {
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => const GroupCart()));
+              },
               icon: Icon(
                 Icons.add_shopping_cart_sharp,
                 color: Colors.purple,

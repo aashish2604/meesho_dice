@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/utils/product_data.dart';
@@ -93,7 +94,7 @@ class OfferCarousal extends StatelessWidget {
 
     return Container(
         color: Colors.white,
-        height: 160,
+        height: 136,
         child: CarouselSlider(
           options: CarouselOptions(
             height: 120,
@@ -103,14 +104,13 @@ class OfferCarousal extends StatelessWidget {
           ),
           items: imgList
               .map((item) => Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
                     width: MediaQuery.of(context).size.width,
                     decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.fill,
+                            image: CachedNetworkImageProvider(item)),
                         borderRadius: BorderRadius.circular(16.0)),
-                    child: Center(
-                        child: Image.network(
-                      item,
-                      fit: BoxFit.fill,
-                    )),
                   ))
               .toList(),
         ));
@@ -138,7 +138,7 @@ class ProductsForYouHeader extends StatelessWidget {
             padding: EdgeInsets.all(12.0),
             child: Text(
               "Products For You",
-              style: TextStyle(fontWeight: FontWeight.w700, fontSize: 20.0),
+              style: TextStyle(fontWeight: FontWeight.w600, fontSize: 18.0),
             ),
           ),
           Container(

@@ -31,7 +31,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(130),
+        preferredSize: Size.fromHeight(118),
         child: AppBar(
           // backgroundColor: Colors.white,
           scrolledUnderElevation: 0,
@@ -40,8 +40,7 @@ class _HomePageState extends State<HomePage> {
           bottom: PreferredSize(
               preferredSize: Size.fromHeight(12),
               child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 12.0, left: 16.0, right: 16.0),
+                padding: const EdgeInsets.only(left: 16.0, right: 16.0),
                 child: HomeAppbarSearch(),
               )),
         ),
@@ -50,6 +49,7 @@ class _HomePageState extends State<HomePage> {
         child: _widgetOptions.elementAt(_selectedIndex),
       ),
       bottomNavigationBar: BottomNavigationBar(
+        backgroundColor: Colors.white,
         items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: _selectedIndex == 0 ? Icon(Icons.home) : Icon(Icons.ac_unit),

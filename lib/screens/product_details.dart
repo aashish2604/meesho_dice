@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/immersive/virtual_tryon_input.dart';
+import 'package:meesho_dice/screens/model_3d_view.dart';
 import 'package:meesho_dice/services/general_functions.dart';
 import 'package:meesho_dice/widgets/circular_iconbutton.dart';
 import 'package:meesho_dice/widgets/image_carousal.dart';
@@ -43,7 +45,7 @@ class ProductDetails extends StatelessWidget {
                   ),
                   Row(
                     children: [
-                      const VirtualStoreContainer(),
+                      VirtualStoreContainer(details: details),
                       Expanded(
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -226,7 +228,8 @@ class ProductDetails extends StatelessWidget {
 }
 
 class VirtualStoreContainer extends StatelessWidget {
-  const VirtualStoreContainer({super.key});
+  final Map<String, dynamic> details;
+  const VirtualStoreContainer({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {
@@ -253,7 +256,12 @@ class VirtualStoreContainer extends StatelessWidget {
                 VirtualStoreElement(
                     borerColor: Colors.green,
                     backgroundColor: Colors.lightGreen.shade100,
-                    action: () {},
+                    action: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Model3dViewer(
+                              modelUrl: details["3d_model_url"],
+                              modelTitle: details["descriptive_name"])));
+                    },
                     label: "3D View"),
                 const SizedBox(
                   width: 10.0,
@@ -269,7 +277,11 @@ class VirtualStoreContainer extends StatelessWidget {
                 VirtualStoreElement(
                     borerColor: Colors.amber.shade800,
                     backgroundColor: Colors.yellow.shade100,
-                    action: () {},
+                    action: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => VirtualTryOnInput(
+                              clothImage: details["tryon_image"])));
+                    },
                     label: "Try-on"),
               ],
             ),
@@ -430,6 +442,14 @@ class _SocialGroupBottomsheetState extends State<SocialGroupBottomsheet> {
                       Navigator.of(context).pop();
                     },
                     title: Text("Chillers"),
+                  ),
+                ),
+                Card(
+                  child: ListTile(
+                    onTap: () async {
+                      Navigator.of(context).pop();
+                    },
+                    title: Text("Sneakerheads"),
                   ),
                 ),
                 const SizedBox(

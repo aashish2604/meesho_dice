@@ -13,6 +13,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 7200,
     "category": "cloths",
+    "tryon_image": "",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/5acf9c85f50b4b1e9f446a5509b613f4.glb",
     "seller_details": {
       "name": "Tirth Enterprise",
       "rating": 3.6,
@@ -23,6 +26,52 @@ List<Map<String, dynamic>> productData = [
       "color": "Ivory White",
       "material": "Cotton",
       "net_quantity": "Pack of 11",
+      "type": "Jacket"
+    },
+    "additional_details": {
+      "product_height": 15,
+      "product_width": 10,
+      "product_length": 10,
+      "product_unit": "Inch",
+      "country_of_origin": "India",
+      "manufacturer_information": "Monti Carlo",
+      "importer_information": "No info",
+      "packer_information": "No info"
+    },
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM.jpeg?alt=media&token=8b47ae1e-a8b6-4def-ba3d-358ad26e9e32",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM%20(1).jpeg?alt=media&token=028403a8-48c6-47c4-a1e6-2d4c428b2c1c",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e"
+    ]
+  },
+  {
+    "id": 16,
+    "title_name": "Mint Suede Jacket",
+    "descriptive_name": "Mint Color Thin Woolean Jacket",
+    "price": 1364,
+    "discount": 12,
+    "is_free_delivery": true,
+    "rating": 4.4,
+    "no_of_feedbacks": 11256,
+    "size": "Medium",
+    "no_of_special_offers": 1,
+    "special_offer_price": 1201,
+    "category": "cloths",
+    "tryon_image":
+        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2F02_upper.png?alt=media&token=1f79f207-c9d4-45b5-9d80-74914c6ef8e5",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/891ee75d75684d63846288fb21345c1d.glb",
+    "seller_details": {
+      "name": "Monti Carlo",
+      "rating": 4.8,
+      "followers": 13456,
+      "products": 530
+    },
+    "product_highlights": {
+      "color": "Mint Green",
+      "material": "Woolean",
+      "net_quantity": "Pack of 1",
       "type": "Scrub"
     },
     "additional_details": {
@@ -36,10 +85,10 @@ List<Map<String, dynamic>> productData = [
       "packer_information": "No info"
     },
     "images": [
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM.jpeg?alt=media&token=8b47ae1e-a8b6-4def-ba3d-358ad26e9e32",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM%20(1).jpeg?alt=media&token=028403a8-48c6-47c4-a1e6-2d4c428b2c1c",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e"
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2F02_upper.png?alt=media&token=1f79f207-c9d4-45b5-9d80-74914c6ef8e5",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(424).png?alt=media&token=c0fecf5d-3a20-4ef8-8520-8fce4965e3fb",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(426).png?alt=media&token=6bd9c424-43ac-47bd-bf24-3a20d0294f6a",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(427).png?alt=media&token=6fc51727-359a-4050-b3a4-2394207acd16"
     ]
   },
   {
@@ -56,6 +105,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 1050,
     "category": "cloths",
+    "tryon_image": "",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/6c3245223333495399dfef9e12574d0d.glb",
     "seller_details": {
       "name": "Tirth Enterprise",
       "rating": 3.6,
@@ -98,6 +150,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 2,
     "special_offer_price": 1050,
     "category": "cloths",
+    "tryon_image": "",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/ef4bb6e3d4bc49078b7c7f9b31dfac5d.glb",
     "seller_details": {
       "name": "Tirth Enterprise",
       "rating": 3.6,
@@ -139,6 +194,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 2,
     "special_offer_price": 18000,
     "category": "electronics",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/17fbc4482a0e4ae78c6431fb94fc1643.glb",
     "seller_details": {
       "name": "SOUL-ELECTRONICS",
       "rating": 4.2,
@@ -180,6 +237,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 5,
     "special_offer_price": 45000,
     "category": "electronics",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/cd0a2b78030a455e9481ad0f464badb1.glb",
     "seller_details": {
       "name": "SOUL-ELECTRONICS",
       "rating": 4.2,
@@ -221,6 +280,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 5,
     "special_offer_price": 4500,
     "category": "electronics",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/de2f14f9be264645bf8c3d12b2c1c458.glb",
     "seller_details": {
       "name": "SOUL-ELECTRONICS",
       "rating": 4.2,
@@ -263,6 +324,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 4500,
     "category": "kids",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/248b4b5ed4354471bf6859312be5f626.glb",
     "seller_details": {
       "name": "INDI-TOY",
       "rating": 4.2,
@@ -305,6 +368,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 4,
     "special_offer_price": 4500,
     "category": "kids",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/9e6ef4592c2647598293265003d8fde0.glb",
     "seller_details": {
       "name": "INDI-TOY",
       "rating": 4.2,
@@ -347,6 +412,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 4,
     "special_offer_price": 550,
     "category": "kids",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/d565a0efb5a6480291f9f9c103e6f8be.glb",
     "seller_details": {
       "name": "INDI-TOY",
       "rating": 4.2,
@@ -389,6 +456,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 4,
     "special_offer_price": 11500,
     "category": "shoes",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/830b96e28aff4f9b94c4dddd6d19db4e.glb",
     "seller_details": {
       "name": "shoe-House",
       "rating": 4.5,
@@ -432,6 +501,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 6,
     "special_offer_price": 10200,
     "category": "shoes",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/4589b6a411014ca0ab0d66d920068021.glb",
     "seller_details": {
       "name": "shoe-House",
       "rating": 4.5,
@@ -475,6 +546,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 16,
     "special_offer_price": 12500,
     "category": "shoes",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/3036385d19b049ed8757e37e02daff88.glb",
     "seller_details": {
       "name": "shoe-House",
       "rating": 4.5,
@@ -517,6 +590,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 6,
     "special_offer_price": 1300,
     "category": "sports",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/2702d65486364c0a9817f90f72624f38.glb",
     "seller_details": {
       "name": "BALAJI-SPORTS",
       "rating": 4.2,
@@ -559,6 +634,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 7,
     "special_offer_price": 15850,
     "category": "sports",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/2d715fe047e94dcab77fdc92f979de59.glb",
     "seller_details": {
       "name": "BALAJI-SPORTS",
       "rating": 4.2,
@@ -599,6 +676,8 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 7,
     "special_offer_price": 15850,
     "category": "sports",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/0fddd2f9974c4b729ab0483468becd27.glb",
     "seller_details": {
       "name": "BALAJI-SPORTS",
       "rating": 4.2,
