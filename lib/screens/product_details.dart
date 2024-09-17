@@ -4,6 +4,7 @@ import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/immersive/virtual_tryon_input.dart';
 import 'package:meesho_dice/screens/model_3d_view.dart';
 import 'package:meesho_dice/services/general_functions.dart';
+import 'package:meesho_dice/widgets/chat_bot.dart';
 import 'package:meesho_dice/widgets/circular_iconbutton.dart';
 import 'package:meesho_dice/widgets/image_carousal.dart';
 import 'package:meesho_dice/widgets/loading.dart';
@@ -225,6 +226,13 @@ class ProductDetails extends StatelessWidget {
             ),
           )
         ],
+      ),
+      floatingActionButton: const Padding(
+        padding: const EdgeInsets.only(bottom: 60),
+        child: const ChatBotFab(
+            initMessage:
+                "Place order between 8PM to 11PM to get personalized discount on this product",
+            containerLifeInSeconds: 6),
       ),
     );
   }
