@@ -51,7 +51,7 @@ class ProductDetails extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceAround,
                           children: [
                             const Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceAround,
+                              mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Column(
                                   children: [
@@ -61,6 +61,9 @@ class ProductDetails extends StatelessWidget {
                                       style: TextStyle(fontSize: 10.0),
                                     ),
                                   ],
+                                ),
+                                const SizedBox(
+                                  width: 30.0,
                                 ),
                                 Column(
                                   children: [
@@ -245,7 +248,7 @@ class VirtualStoreContainer extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const Text(
-              "Virtual Store",
+              "Immersive Zone",
               style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600),
             ),
             const SizedBox(
@@ -269,20 +272,28 @@ class VirtualStoreContainer extends StatelessWidget {
                 VirtualStoreElement(
                     borerColor: Colors.blue.shade900,
                     backgroundColor: Colors.lightBlue.shade100,
-                    action: () {},
-                    label: "AR View"),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                VirtualStoreElement(
-                    borerColor: Colors.amber.shade800,
-                    backgroundColor: Colors.yellow.shade100,
                     action: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => VirtualTryOnInput(
-                              clothImage: details["tryon_image"])));
+                      Fluttertoast.showToast(
+                          msg: "Your device does not support this feature");
                     },
-                    label: "Try-on"),
+                    label: "AR View"),
+                details["tryon_image"] != null
+                    ? const SizedBox(
+                        width: 10.0,
+                      )
+                    : const SizedBox.shrink(),
+                details["tryon_image"] != null
+                    ? VirtualStoreElement(
+                        borerColor: Colors.amber.shade800,
+                        backgroundColor: Colors.yellow.shade100,
+                        action: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => VirtualTryOnInput(
+                                  tryOnCategory: details["tryon_category"],
+                                  clothImage: details["tryon_image"])));
+                        },
+                        label: "Try-on")
+                    : const SizedBox.shrink(),
               ],
             ),
           ],

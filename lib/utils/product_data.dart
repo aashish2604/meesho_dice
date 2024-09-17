@@ -13,7 +13,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 7200,
     "category": "cloths",
-    "tryon_image": "",
+    "tryon_category": "Upper body",
+    "tryon_image":
+        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
     "3d_model_url":
         "https://cdn.tinyglb.com/models/5acf9c85f50b4b1e9f446a5509b613f4.glb",
     "seller_details": {
@@ -39,10 +41,10 @@ List<Map<String, dynamic>> productData = [
       "packer_information": "No info"
     },
     "images": [
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM.jpeg?alt=media&token=8b47ae1e-a8b6-4def-ba3d-358ad26e9e32",
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM%20(1).jpeg?alt=media&token=028403a8-48c6-47c4-a1e6-2d4c428b2c1c",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e"
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72"
     ]
   },
   {
@@ -58,6 +60,7 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 1201,
     "category": "cloths",
+    "tryon_category": "Upper body",
     "tryon_image":
         "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2F02_upper.png?alt=media&token=1f79f207-c9d4-45b5-9d80-74914c6ef8e5",
     "3d_model_url":
@@ -92,6 +95,50 @@ List<Map<String, dynamic>> productData = [
     ]
   },
   {
+    "id": 17,
+    "title_name": "Vintage Sofa",
+    "descriptive_name": "Brown Leather Vinatage Sofa for deep comfort",
+    "price": 36521,
+    "discount": 20,
+    "is_free_delivery": true,
+    "rating": 4.8,
+    "no_of_feedbacks": 1263,
+    "size": "Medium",
+    "no_of_special_offers": 1,
+    "special_offer_price": 29216,
+    "category": "home",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/2587ba33758b4179948ff7c19b4ad20b.glb",
+    "seller_details": {
+      "name": "IKEA",
+      "rating": 4.8,
+      "followers": 29005,
+      "products": 850
+    },
+    "product_highlights": {
+      "color": "Deep Brown",
+      "material": "Leather",
+      "net_quantity": "Pack of 1",
+      "type": "Sofa"
+    },
+    "additional_details": {
+      "product_height": 3,
+      "product_width": 2.5,
+      "product_length": 4,
+      "product_unit": "Feet",
+      "country_of_origin": "India",
+      "manufacturer_information": "IKEA",
+      "importer_information": "No info",
+      "packer_information": "No info"
+    },
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(428).png?alt=media&token=1285ac9a-f687-4042-ba7b-e39369968bd5",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(429).png?alt=media&token=68652a6b-1df0-482e-a3ac-ec6b031fa071",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(430).png?alt=media&token=ba278d23-08bf-4ab5-bc69-84d5db51234e",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(431).png?alt=media&token=1158343d-6bbe-470d-840d-1df666b02231"
+    ]
+  },
+  {
     "id": 2,
     "title_name": "CARGO JEANS",
     "descriptive_name":
@@ -105,7 +152,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 1,
     "special_offer_price": 1050,
     "category": "cloths",
-    "tryon_image": "",
+    "tryon_category": "Lower body",
+    "tryon_image":
+        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2011.03.43%20PM.jpeg?alt=media&token=e3e21775-82f8-4bee-b2d0-b79855a2e4ff",
     "3d_model_url":
         "https://cdn.tinyglb.com/models/6c3245223333495399dfef9e12574d0d.glb",
     "seller_details": {
@@ -150,7 +199,9 @@ List<Map<String, dynamic>> productData = [
     "no_of_special_offers": 2,
     "special_offer_price": 1050,
     "category": "cloths",
-    "tryon_image": "",
+    "tryon_category": "Upper body",
+    "tryon_image":
+        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FScreenshot%20(275).png?alt=media&token=63df333a-5e75-49dd-af9d-4c513a09571d",
     "3d_model_url":
         "https://cdn.tinyglb.com/models/ef4bb6e3d4bc49078b7c7f9b31dfac5d.glb",
     "seller_details": {

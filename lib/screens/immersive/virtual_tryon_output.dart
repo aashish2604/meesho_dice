@@ -8,8 +8,12 @@ import 'package:meesho_dice/widgets/loading.dart';
 class VirtualTryonOutput extends StatelessWidget {
   final String clothImageUrl;
   final File humanImageFile;
+  final String tryOnCategory;
   const VirtualTryonOutput(
-      {super.key, required this.clothImageUrl, required this.humanImageFile});
+      {super.key,
+      required this.clothImageUrl,
+      required this.humanImageFile,
+      required this.tryOnCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +30,7 @@ class VirtualTryonOutput extends StatelessWidget {
         backgroundColor: Colors.black,
         body: FutureBuilder(
             future: VirtualTryon().getVirtualTryOnResultFromNetworkAndAsset(
-                clothImageUrl, humanImageFile, "Upper body"),
+                clothImageUrl, humanImageFile, tryOnCategory),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const Center(

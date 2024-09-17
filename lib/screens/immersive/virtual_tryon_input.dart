@@ -8,7 +8,9 @@ import 'package:meesho_dice/services/theme.dart';
 
 class VirtualTryOnInput extends StatefulWidget {
   final String clothImage;
-  const VirtualTryOnInput({super.key, required this.clothImage});
+  final String tryOnCategory;
+  const VirtualTryOnInput(
+      {super.key, required this.clothImage, required this.tryOnCategory});
 
   @override
   State<VirtualTryOnInput> createState() => _VirtualTryOnInputState();
@@ -70,6 +72,7 @@ class _VirtualTryOnInputState extends State<VirtualTryOnInput> {
                 : HumanImageWidgets(
                     humanImage: humanImage!,
                     clothImageUrl: widget.clothImage,
+                    tryOnCategory: widget.tryOnCategory,
                   )
           ],
         ),
@@ -81,8 +84,12 @@ class _VirtualTryOnInputState extends State<VirtualTryOnInput> {
 class HumanImageWidgets extends StatelessWidget {
   final File humanImage;
   final String clothImageUrl;
+  final String tryOnCategory;
   const HumanImageWidgets(
-      {super.key, required this.humanImage, required this.clothImageUrl});
+      {super.key,
+      required this.humanImage,
+      required this.clothImageUrl,
+      required this.tryOnCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -109,6 +116,7 @@ class HumanImageWidgets extends StatelessWidget {
                   builder: (context) => VirtualTryonOutput(
                         clothImageUrl: clothImageUrl,
                         humanImageFile: humanImage,
+                        tryOnCategory: tryOnCategory,
                       )));
             },
             style: TextButton.styleFrom(backgroundColor: Colors.purple),
