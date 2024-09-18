@@ -115,12 +115,18 @@ class _ChatBotFabState extends State<ChatBotFab>
 
             const SizedBox(width: 3), // Add some spacing between buttons
             FloatingActionButton(
+              shape: CircleBorder(),
               heroTag: 'chatBotFab',
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const ChatBotChatScreen()));
               },
-              child: const Icon(Icons.chat_bubble_outline_rounded),
+              child: Padding(
+                padding: const EdgeInsets.all(2.0),
+                child: Center(
+                  child: Image(image: AssetImage("assets/images/chatbot.png")),
+                ),
+              ),
             )
           ]),
     );
