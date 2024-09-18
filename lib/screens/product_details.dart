@@ -4,7 +4,7 @@ import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/immersive/virtual_tryon_input.dart';
 import 'package:meesho_dice/screens/model_3d_view.dart';
 import 'package:meesho_dice/services/general_functions.dart';
-import 'package:meesho_dice/widgets/chat_bot.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:meesho_dice/widgets/circular_iconbutton.dart';
 import 'package:meesho_dice/widgets/image_carousal.dart';
 import 'package:meesho_dice/widgets/loading.dart';

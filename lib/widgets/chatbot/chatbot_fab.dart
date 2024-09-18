@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_chat_screen.dart';
 
 class ChatBotFab extends StatefulWidget {
   final String initMessage;
@@ -116,7 +117,8 @@ class _ChatBotFabState extends State<ChatBotFab>
             FloatingActionButton(
               heroTag: 'chatBotFab',
               onPressed: () {
-                // Action 2
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ChatBotChatScreen()));
               },
               child: const Icon(Icons.chat_bubble_outline_rounded),
             )
