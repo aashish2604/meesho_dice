@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/immersive/augmented_reality.dart';
 import 'package:meesho_dice/screens/immersive/virtual_tryon_input.dart';
 import 'package:meesho_dice/screens/model_3d_view.dart';
 import 'package:meesho_dice/services/general_functions.dart';
@@ -281,8 +282,10 @@ class VirtualStoreContainer extends StatelessWidget {
                     borerColor: Colors.blue.shade900,
                     backgroundColor: Colors.lightBlue.shade100,
                     action: () {
-                      Fluttertoast.showToast(
-                          msg: "Your device does not support this feature");
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => AugmentedRealityView(
+                                modelUrl: details["3d_model_url"],
+                              )));
                     },
                     label: "AR View"),
                 details["tryon_image"] != null
