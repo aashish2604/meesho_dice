@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/cart.dart';
 import 'package:meesho_dice/screens/social/games.dart';
 import 'package:meesho_dice/screens/social/group_cart.dart';
 import 'package:meesho_dice/services/theme.dart';
@@ -64,8 +65,8 @@ class _SocialAreaState extends State<SocialArea> {
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => const ShoppingCart(
-                          isGroupCart: true,
+                    builder: (context) => GroupShoppingCart(
+                          groupId: widget.groupId,
                         )));
               },
               icon: const Icon(

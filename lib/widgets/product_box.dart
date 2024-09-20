@@ -15,89 +15,93 @@ class ProductBox extends StatelessWidget {
         Navigator.of(context).push(MaterialPageRoute(
             builder: (context) => ProductDetails(details: details)));
       },
-      child: Column(
-        children: [
-          SizedBox(
-            height: 200,
-            width: double.infinity,
-            child: CachedNetworkImage(
-              imageUrl: details["images"][0],
-              fit: BoxFit.fill,
+      child: Container(
+        color: Colors.white,
+        child: Column(
+          children: [
+            SizedBox(
+              height: 200,
+              width: double.infinity,
+              child: CachedNetworkImage(
+                imageUrl: details["images"][0],
+                fit: BoxFit.fill,
+              ),
             ),
-          ),
-          const SizedBox(
-            height: 10.0,
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 16.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  details["title_name"],
-                  maxLines: 1,
-                  overflow: TextOverflow.ellipsis,
-                  style: bodyTextStyle,
-                ),
-                const SizedBox(
-                  height: 8.0,
-                ),
-                Row(
-                  children: [
-                    Text(
-                      "₹ ${details["price"]}",
-                      style: const TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w600),
-                    ),
-                    const SizedBox(
-                      width: 4.0,
-                    ),
-                    Text(
-                      "${(details["price"] / (1 - 0.01 * details["discount"])).ceil()}",
-                      style: const TextStyle(
-                          decoration: TextDecoration.lineThrough,
-                          fontSize: 12.0,
-                          color: Colors.grey,
-                          fontWeight: FontWeight.w500),
-                    ),
-                    const SizedBox(
-                      width: 4.0,
-                    ),
-                    Text(
-                      "${details["discount"].toString()}% off",
-                      style: const TextStyle(
-                          fontSize: 12.5,
-                          fontWeight: FontWeight.w500,
-                          color: Colors.black54),
-                    ),
-                  ],
-                ),
-                Text(
-                  "Free Delivery",
-                  style: TextStyle(
-                      fontSize: 11.0,
-                      fontWeight: FontWeight.w500,
-                      color: Colors.black.withOpacity(0.7)),
-                ),
-                const SizedBox(
-                  height: 4.0,
-                ),
-                Row(
-                  children: [
-                    RatingBox(rating: details["rating"].toDouble()),
-                    const SizedBox(
-                      width: 4.0,
-                    ),
-                    Text(
-                      "(${GeneralFunctions().formatIndianNumber(details["no_of_feedbacks"].toString())})",
-                      style: const TextStyle(color: Colors.grey, fontSize: 12),
-                    )
-                  ],
-                )
-              ],
+            const SizedBox(
+              height: 10.0,
             ),
-          )
-        ],
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    details["title_name"],
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: bodyTextStyle,
+                  ),
+                  const SizedBox(
+                    height: 8.0,
+                  ),
+                  Row(
+                    children: [
+                      Text(
+                        "₹ ${details["price"]}",
+                        style: const TextStyle(
+                            fontSize: 16.0, fontWeight: FontWeight.w600),
+                      ),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      Text(
+                        "${(details["price"] / (1 - 0.01 * details["discount"])).ceil()}",
+                        style: const TextStyle(
+                            decoration: TextDecoration.lineThrough,
+                            fontSize: 12.0,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500),
+                      ),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      Text(
+                        "${details["discount"].toString()}% off",
+                        style: const TextStyle(
+                            fontSize: 12.5,
+                            fontWeight: FontWeight.w500,
+                            color: Colors.black54),
+                      ),
+                    ],
+                  ),
+                  Text(
+                    "Free Delivery",
+                    style: TextStyle(
+                        fontSize: 11.0,
+                        fontWeight: FontWeight.w500,
+                        color: Colors.black.withOpacity(0.7)),
+                  ),
+                  const SizedBox(
+                    height: 4.0,
+                  ),
+                  Row(
+                    children: [
+                      RatingBox(rating: details["rating"].toDouble()),
+                      const SizedBox(
+                        width: 4.0,
+                      ),
+                      Text(
+                        "(${GeneralFunctions().formatIndianNumber(details["no_of_feedbacks"].toString())})",
+                        style:
+                            const TextStyle(color: Colors.grey, fontSize: 12),
+                      )
+                    ],
+                  )
+                ],
+              ),
+            )
+          ],
+        ),
       ),
     );
   }

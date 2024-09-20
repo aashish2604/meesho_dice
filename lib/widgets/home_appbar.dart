@@ -1,6 +1,6 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:meesho_dice/screens/social/group_cart.dart';
+import 'package:meesho_dice/screens/cart.dart';
 import 'package:meesho_dice/screens/social/groups_list.dart';
 import 'package:meesho_dice/screens/social/social_area.dart';
 

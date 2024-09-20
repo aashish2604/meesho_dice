@@ -1,14 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/cart.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/cart_tile.dart';
 import 'package:meesho_dice/widgets/loading.dart';
 
-class ShoppingCart extends StatelessWidget {
-  final bool isGroupCart;
-  const ShoppingCart({super.key, required this.isGroupCart});
+class GroupShoppingCart extends StatelessWidget {
+  final String groupId;
+  const GroupShoppingCart({super.key, required this.groupId});
 
   List<int> getProductList(List<QueryDocumentSnapshot<Object?>> products) {
     List<int> response = [];
@@ -19,29 +21,37 @@ class ShoppingCart extends StatelessWidget {
     return response;
   }
 
-  int getAmount(List<int> products) {
-    int totalAmount = 0;
-    for (int i in products) {
-      Map<String, dynamic> prod = productData.firstWhere((e) => e["id"] == i);
-      int price = prod["price"];
-      int discount = prod["discount"];
-      int totalPrice = (price / (1 - 0.01 * discount)).ceil();
-      totalAmount += totalPrice;
-    }
-    return totalAmount;
-  }
-
-  int getDiscount(List<int> products) {
+  int getDiscount(List<QueryDocumentSnapshot<Object?>> products) {
     int totalDiscount = 0;
-    for (int i in products) {
-      Map<String, dynamic> prod = productData.firstWhere((e) => e["id"] == i);
-      int price = prod["price"];
-      int discount = prod["discount"];
-      int totalPrice = (price / (1 - 0.01 * discount)).ceil();
-      int discountAmount = totalPrice - price;
-      totalDiscount += discountAmount;
+    for (var i in products) {
+      final prodInfo = i.data() as Map<String, dynamic>;
+      if (prodInfo["adder_id"] == FirebaseServices.getUserId()) {
+        Map<String, dynamic> prodDetails =
+            productData.firstWhere((e) => e["id"] == prodInfo["id"]);
+        int price = prodDetails["price"];
+        int discount = prodDetails["discount"];
+        int totalPrice = (price / (1 - 0.01 * discount)).ceil();
+        int discountAmount = totalPrice - price;
+        totalDiscount += discountAmount;
+      }
     }
     return totalDiscount;
+  }
+
+  int getAmount(List<QueryDocumentSnapshot<Object?>> products) {
+    int totalAmount = 0;
+    for (var i in products) {
+      final prodInfo = i.data() as Map<String, dynamic>;
+      if (prodInfo["adder_id"] == FirebaseServices.getUserId()) {
+        Map<String, dynamic> prodDetails =
+            productData.firstWhere((e) => e["id"] == prodInfo["id"]);
+        int price = prodDetails["price"];
+        int discount = prodDetails["discount"];
+        int totalPrice = (price / (1 - 0.01 * discount)).ceil();
+        totalAmount += totalPrice;
+      }
+    }
+    return totalAmount;
   }
 
   @override
@@ -49,15 +59,15 @@ class ShoppingCart extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: Text(
-          isGroupCart ? "Group Cart" : "Cart",
+        title: const Text(
+          "Group Cart",
           style: appBarTextStyle,
         ),
       ),
       body: StreamBuilder(
           stream: FirebaseFirestore.instance
-              .collection("users")
-              .doc(FirebaseServices.getUserId())
+              .collection("groups")
+              .doc(groupId)
               .collection("cart")
               .snapshots(),
           builder:
@@ -90,10 +100,11 @@ class ShoppingCart extends StatelessWidget {
                             itemBuilder: (context, index) {
                               var data = documents[index].data()
                                   as Map<String, dynamic>;
-                              return CartTile(
-                                isGroupCart: isGroupCart,
+                              return GroupCartTile(
+                                groupId: groupId,
                                 productId: data["id"],
                                 productDocId: documents[index].id,
+                                productInteractionDetails: data,
                               );
                             }),
                         Container(
@@ -116,7 +127,10 @@ class ShoppingCart extends StatelessWidget {
                         const SizedBox(
                           height: 10,
                         ),
-                        CartPriceBox(products: getProductList(documents)),
+                        GroupCartPriceBox(
+                          products: getProductList(documents),
+                          responseData: documents,
+                        ),
                         SizedBox(
                           height: 80,
                         ),
@@ -134,7 +148,7 @@ class ShoppingCart extends StatelessWidget {
                         child: Row(
                           children: [
                             Text(
-                              "₹ ${getAmount(getProductList(documents)) - getDiscount(getProductList(documents)) + 24}",
+                              "₹ ${getAmount(documents) - getDiscount(documents) + 24}",
                               style: TextStyle(
                                   fontSize: 20, fontWeight: FontWeight.bold),
                             ),
@@ -163,33 +177,54 @@ class ShoppingCart extends StatelessWidget {
   }
 }
 
-class CartPriceBox extends StatelessWidget {
+class GroupCartPriceBox extends StatelessWidget {
   final List<int> products;
-  const CartPriceBox({super.key, required this.products});
+  final List<QueryDocumentSnapshot<Object?>> responseData;
+  const GroupCartPriceBox(
+      {super.key, required this.products, required this.responseData});
 
-  int getAmount() {
+  int getDiscount(List<QueryDocumentSnapshot<Object?>> products) {
+    int totalDiscount = 0;
+    for (var i in products) {
+      final prodInfo = i.data() as Map<String, dynamic>;
+      if (prodInfo["adder_id"] == FirebaseServices.getUserId()) {
+        Map<String, dynamic> prodDetails =
+            productData.firstWhere((e) => e["id"] == prodInfo["id"]);
+        int price = prodDetails["price"];
+        int discount = prodDetails["discount"];
+        int totalPrice = (price / (1 - 0.01 * discount)).ceil();
+        int discountAmount = totalPrice - price;
+        totalDiscount += discountAmount;
+      }
+    }
+    return totalDiscount;
+  }
+
+  int getAmount(List<QueryDocumentSnapshot<Object?>> products) {
     int totalAmount = 0;
-    for (int i in products) {
-      Map<String, dynamic> prod = productData.firstWhere((e) => e["id"] == i);
-      int price = prod["price"];
-      int discount = prod["discount"];
-      int totalPrice = (price / (1 - 0.01 * discount)).ceil();
-      totalAmount += totalPrice;
+    for (var i in products) {
+      final prodInfo = i.data() as Map<String, dynamic>;
+      if (prodInfo["adder_id"] == FirebaseServices.getUserId()) {
+        Map<String, dynamic> prodDetails =
+            productData.firstWhere((e) => e["id"] == prodInfo["id"]);
+        int price = prodDetails["price"];
+        int discount = prodDetails["discount"];
+        int totalPrice = (price / (1 - 0.01 * discount)).ceil();
+        totalAmount += totalPrice;
+      }
     }
     return totalAmount;
   }
 
-  int getDiscount() {
-    int totalDiscount = 0;
-    for (int i in products) {
-      Map<String, dynamic> prod = productData.firstWhere((e) => e["id"] == i);
-      int price = prod["price"];
-      int discount = prod["discount"];
-      int totalPrice = (price / (1 - 0.01 * discount)).ceil();
-      int discountAmount = totalPrice - price;
-      totalDiscount += discountAmount;
+  int getYourOrderCount(List<QueryDocumentSnapshot<Object?>> products) {
+    int count = 0;
+    for (var i in products) {
+      final prodInfo = i.data() as Map<String, dynamic>;
+      if (prodInfo["adder_id"] == FirebaseServices.getUserId()) {
+        count++;
+      }
     }
-    return totalDiscount;
+    return count;
   }
 
   @override
@@ -204,7 +239,7 @@ class CartPriceBox extends StatelessWidget {
             height: 10,
           ),
           Text(
-            "Price Details (${products.length} Items)",
+            "Price Details (${getYourOrderCount(responseData)} Items)",
             style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
           ),
           const SizedBox(
@@ -212,11 +247,11 @@ class CartPriceBox extends StatelessWidget {
           ),
           CartPriceDetailsRow(
               title: "Total Product Price",
-              amount: getAmount().toString(),
+              amount: getAmount(responseData).toString(),
               isDiscount: false),
           CartPriceDetailsRow(
               title: "Total Discounts",
-              amount: getDiscount().toString(),
+              amount: getDiscount(responseData).toString(),
               isDiscount: true),
           const CartPriceDetailsRow(
               title: "Additional Fees", amount: "24", isDiscount: false),
@@ -228,7 +263,8 @@ class CartPriceBox extends StatelessWidget {
           ),
           CartPriceDetailsRow(
             title: "Order Total",
-            amount: (getAmount() - getDiscount() + 24).toString(),
+            amount: (getAmount(responseData) - getDiscount(responseData) + 24)
+                .toString(),
             isDiscount: false,
             isTotal: true,
           )
@@ -238,51 +274,197 @@ class CartPriceBox extends StatelessWidget {
   }
 }
 
-class CartPriceDetailsRow extends StatelessWidget {
-  final String title;
-  final String amount;
-  final bool isDiscount;
-  final bool isTotal;
-  const CartPriceDetailsRow(
+class GroupCartTile extends StatelessWidget {
+  final int productId;
+  final String productDocId;
+  final String groupId;
+  final Map<String, dynamic> productInteractionDetails;
+  const GroupCartTile(
       {super.key,
-      required this.title,
-      required this.amount,
-      required this.isDiscount,
-      this.isTotal = false});
+      required this.productId,
+      required this.productDocId,
+      required this.productInteractionDetails,
+      required this.groupId});
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0),
-      child: Row(
+    Map<String, dynamic> details =
+        productData.firstWhere((element) => element["id"] == productId);
+    return Container(
+      margin: const EdgeInsets.only(bottom: 10),
+      color: Colors.white,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          Text(
-            title,
-            style: TextStyle(
-                color: isDiscount ? Colors.green : Colors.black,
-                fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
-                fontSize: isTotal ? 18 : 14),
+          Padding(
+            padding: const EdgeInsets.only(left: 16.0, right: 16.0, top: 16),
+            child: Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                GroupCartImageContainer(
+                  imageUrl: details["images"][0],
+                ),
+                const SizedBox(
+                  width: 16.0,
+                ),
+                Expanded(
+                  child: GroupCartProductDetails(
+                    groupId: groupId,
+                    details: details,
+                    productDocId: productDocId,
+                    productInteractionDetails: productInteractionDetails,
+                  ),
+                ),
+              ],
+            ),
           ),
-          const Expanded(child: SizedBox()),
-          isDiscount
-              ? Icon(
-                  Icons.remove,
-                  size: 14,
-                  color: Colors.green,
-                )
-              : Icon(Icons.add, size: 14),
+          Divider(
+            thickness: 1.7,
+          ),
           const SizedBox(
-            width: 7,
+            height: 10,
           ),
-          Text(
-            "₹$amount",
-            style: TextStyle(
-                color: isDiscount ? Colors.green : Colors.black,
-                fontWeight: isTotal ? FontWeight.w600 : FontWeight.w400,
-                fontSize: isTotal ? 18 : 14),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16),
+            child: Row(
+              children: [
+                Text(
+                  "Sold by: ${details["seller_details"]["name"]}",
+                  style: const TextStyle(color: Colors.black54),
+                ),
+                const Expanded(
+                  child: SizedBox(),
+                ),
+                const Text("Free Delivery",
+                    style: TextStyle(color: Colors.black54))
+              ],
+            ),
           ),
+          const SizedBox(
+            height: 14.0,
+          )
         ],
       ),
+    );
+  }
+}
+
+class GroupCartImageContainer extends StatelessWidget {
+  final String imageUrl;
+  const GroupCartImageContainer({super.key, required this.imageUrl});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      width: 80,
+      decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(16),
+          image: DecorationImage(
+              fit: BoxFit.fill, image: CachedNetworkImageProvider(imageUrl))),
+    );
+  }
+}
+
+class GroupCartProductDetails extends StatelessWidget {
+  final Map<String, dynamic> productInteractionDetails;
+  final Map<String, dynamic> details;
+  final String productDocId;
+  final String groupId;
+  const GroupCartProductDetails(
+      {super.key,
+      required this.details,
+      required this.productDocId,
+      required this.productInteractionDetails,
+      required this.groupId});
+
+  @override
+  Widget build(BuildContext context) {
+    String userId = FirebaseServices.getUserId();
+    bool isMyAddition = productInteractionDetails["adder_id"] == userId;
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          details["title_name"],
+          maxLines: 1,
+          overflow: TextOverflow.ellipsis,
+          style: const TextStyle(fontSize: 14.0, fontWeight: FontWeight.w900),
+        ),
+        Row(
+          children: [
+            Text(
+              "₹ ${details["price"]}",
+              style:
+                  const TextStyle(fontSize: 16.0, fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              width: 4.0,
+            ),
+            Text(
+              "${(details["price"] / (1 - 0.01 * details["discount"])).ceil()}",
+              style: const TextStyle(
+                  decoration: TextDecoration.lineThrough,
+                  fontSize: 12.0,
+                  color: Colors.grey,
+                  fontWeight: FontWeight.w500),
+            ),
+            const SizedBox(
+              width: 4.0,
+            ),
+            Text(
+              "${details["discount"].toString()}% off",
+              style: const TextStyle(
+                  fontSize: 12.5,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.black54),
+            ),
+          ],
+        ),
+        Text(
+          "Adder: ${productInteractionDetails["adder_name"]}",
+          style: TextStyle(
+              fontSize: 13, fontWeight: FontWeight.w600, color: Colors.black87),
+        ),
+        Text("Easy Returns"),
+        const SizedBox(
+          height: 10.0,
+        ),
+        Row(
+          children: [
+            Icon(
+              Icons.favorite,
+              color: Colors.red,
+            ),
+            SizedBox(
+              width: 4.0,
+            ),
+            Text("${productInteractionDetails["no_of_likes"]}")
+          ],
+        ),
+        !isMyAddition
+            ? const SizedBox(
+                height: 10.0,
+              )
+            : TextButton.icon(
+                onPressed: () async {
+                  await FirebaseServices()
+                      .removeProductFromGroupCart(groupId, productDocId);
+                },
+                icon: Icon(
+                  Icons.close,
+                  color: Colors.black.withOpacity(0.7),
+                  size: 18,
+                ),
+                label: Text(
+                  "Remove",
+                  style: TextStyle(
+                      fontSize: 13,
+                      color: Colors.black.withOpacity(0.7),
+                      fontWeight: FontWeight.bold),
+                ))
+      ],
     );
   }
 }

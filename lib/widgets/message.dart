@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/product_details.dart';
 import 'package:meesho_dice/services/general_functions.dart';
 import 'package:meesho_dice/services/theme.dart';
@@ -21,7 +22,7 @@ class MessagePage extends StatefulWidget {
 
 class _MessagePageState extends State<MessagePage> {
   final chatMessages = FirebaseFirestore.instance.collection('groups');
-  final String _currentUid = "fbSH5sqoREa1ZdpK0ShRUUct0mh2";
+  final String _currentUid = FirebaseServices.getUserId();
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +48,7 @@ class _MessagePageState extends State<MessagePage> {
                       snapshot.data!.docs.map((DocumentSnapshot document) {
                     Map<String, dynamic> data =
                         document.data() as Map<String, dynamic>;
+                    data.addAll({"doc_id": document.id});
                     bool isMe =
                         (_currentUid == data['sender_uid'] ? true : false);
                     bool isProduct = data['type'] == "product";
@@ -97,9 +99,15 @@ class _MessagePageState extends State<MessagePage> {
                                 )
                               : isMe
                                   ? ProductMessageBoxMe(
-                                      productId: data["product_id"])
+                                      productId: data["product_id"],
+                                      chatData: data,
+                                      groupId: widget.groupId,
+                                    )
                                   : ProductMessageBoxNotMe(
-                                      productId: data['product_id']),
+                                      productId: data['product_id'],
+                                      chatData: data,
+                                      groupId: widget.groupId,
+                                    ),
                         )
                       ],
                     );
@@ -112,7 +120,13 @@ class _MessagePageState extends State<MessagePage> {
 
 class ProductMessageBoxMe extends StatelessWidget {
   final int productId;
-  const ProductMessageBoxMe({super.key, required this.productId});
+  final String groupId;
+  final Map<String, dynamic> chatData;
+  const ProductMessageBoxMe(
+      {super.key,
+      required this.productId,
+      required this.groupId,
+      required this.chatData});
 
   @override
   Widget build(BuildContext context) {
@@ -177,14 +191,54 @@ class ProductMessageBoxMe extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 12.0,
+                        height: 4.0,
                       ),
-                      Text(
-                        "Free Delivery",
-                        style: TextStyle(color: Colors.white70, fontSize: 12),
-                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("groups")
+                              .doc(groupId)
+                              .collection("chats")
+                              .doc(chatData["doc_id"])
+                              .collection("likes")
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final data = snapshot.data!.docs;
+                              bool isLikedByMe() {
+                                for (var i in data) {
+                                  if (i.id == FirebaseServices.getUserId()) {
+                                    return true;
+                                  }
+                                }
+                                return false;
+                              }
+
+                              return Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        FirebaseServices().toggleLikeStatus(
+                                            isLikedByMe(),
+                                            groupId,
+                                            chatData["doc_id"]);
+                                      },
+                                      icon: isLikedByMe()
+                                          ? const Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            )
+                                          : const Icon(
+                                              Icons.favorite_border_outlined)),
+                                  Text("${data.length}"),
+                                ],
+                              );
+                            }
+                            return const SizedBox(
+                              height: 15.0,
+                            );
+                          }),
                       const SizedBox(
-                        height: 8,
+                        height: 4,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -211,9 +265,11 @@ class ProductMessageBoxMe extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     OutlinedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          await FirebaseServices().addProductToGroupCart(
+                              productId, FirebaseServices.getUserId(), groupId);
                           Fluttertoast.showToast(
-                              msg: "Product added to group card");
+                              msg: "Product added to group cart");
                         },
                         style: OutlinedButton.styleFrom(
                             side: BorderSide(color: Colors.white, width: 0.5),
@@ -277,7 +333,14 @@ class ProductMessageBoxMe extends StatelessWidget {
 
 class ProductMessageBoxNotMe extends StatelessWidget {
   final int productId;
-  const ProductMessageBoxNotMe({super.key, required this.productId});
+  final String groupId;
+  final Map<String, dynamic> chatData;
+  const ProductMessageBoxNotMe({
+    super.key,
+    required this.productId,
+    required this.groupId,
+    required this.chatData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -331,14 +394,54 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(
-                        height: 12.0,
+                        height: 0.0,
                       ),
-                      Text(
-                        "Free Delivery",
-                        style: TextStyle(color: Colors.black87, fontSize: 12),
-                      ),
+                      StreamBuilder(
+                          stream: FirebaseFirestore.instance
+                              .collection("groups")
+                              .doc(groupId)
+                              .collection("chats")
+                              .doc(chatData["doc_id"])
+                              .collection("likes")
+                              .snapshots(),
+                          builder: (context, snapshot) {
+                            if (snapshot.hasData) {
+                              final data = snapshot.data!.docs;
+                              bool isLikedByMe() {
+                                for (var i in data) {
+                                  if (i.id == FirebaseServices.getUserId()) {
+                                    return true;
+                                  }
+                                }
+                                return false;
+                              }
+
+                              return Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {
+                                        FirebaseServices().toggleLikeStatus(
+                                            isLikedByMe(),
+                                            groupId,
+                                            chatData["doc_id"]);
+                                      },
+                                      icon: isLikedByMe()
+                                          ? const Icon(
+                                              Icons.favorite,
+                                              color: Colors.red,
+                                            )
+                                          : const Icon(
+                                              Icons.favorite_border_outlined)),
+                                  Text("${data.length}"),
+                                ],
+                              );
+                            }
+                            return const SizedBox(
+                              height: 15.0,
+                            );
+                          }),
                       const SizedBox(
-                        height: 8,
+                        height: 0,
                       ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.start,
@@ -407,9 +510,11 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                       width: 10.0,
                     ),
                     OutlinedButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          await FirebaseServices().addProductToGroupCart(
+                              productId, FirebaseServices.getUserId(), groupId);
                           Fluttertoast.showToast(
-                              msg: "Product added to group card");
+                              msg: "Product added to group cart");
                         },
                         style: OutlinedButton.styleFrom(
                             side: BorderSide(color: kMeeshoPurple, width: 0.5),

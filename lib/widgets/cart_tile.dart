@@ -7,8 +7,10 @@ class CartTile extends StatelessWidget {
   final bool isGroupCart;
   final int productId;
   final String productDocId;
+  final int? numberOfLikes;
   const CartTile(
       {super.key,
+      this.numberOfLikes,
       required this.isGroupCart,
       required this.productId,
       required this.productDocId});

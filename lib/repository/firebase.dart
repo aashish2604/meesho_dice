@@ -62,11 +62,58 @@ class FirebaseServices {
         .delete();
   }
 
+  Future removeProductFromGroupCart(String groupId, String docId) async {
+    await FirebaseFirestore.instance
+        .collection("groups")
+        .doc(groupId)
+        .collection("cart")
+        .doc(docId)
+        .delete();
+  }
+
   Future addProductToCart(int productId) async {
     await FirebaseFirestore.instance
         .collection("users")
         .doc(getUserId())
         .collection("cart")
         .add({"id": productId});
+  }
+
+  Future addProductToGroupCart(
+      int productId, String adderId, String groupId) async {
+    final userDetails = await getUserDetails();
+    await FirebaseFirestore.instance
+        .collection("groups")
+        .doc(groupId)
+        .collection("cart")
+        .add({
+      "id": productId,
+      "adder_id": adderId,
+      "adder_name": userDetails!["username"]
+    });
+    print("something");
+  }
+
+  Future toggleLikeStatus(
+      bool currentStatus, String groupId, String chatId) async {
+    if (currentStatus) {
+      await FirebaseFirestore.instance
+          .collection("groups")
+          .doc(groupId)
+          .collection("chats")
+          .doc(chatId)
+          .collection("likes")
+          .doc(getUserId())
+          .delete();
+    } else {
+      await FirebaseFirestore.instance
+          .collection("groups")
+          .doc(groupId)
+          .collection("chats")
+          .doc(chatId)
+          .collection("likes")
+          .doc(getUserId())
+          .set({});
+    }
   }
 }
