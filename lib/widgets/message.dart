@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/screens/product_details.dart';
 import 'package:meesho_dice/services/general_functions.dart';
+import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/product_box.dart';
 
@@ -83,8 +84,8 @@ class _MessagePageState extends State<MessagePage> {
                                     topRight: Radius.circular(15),
                                     bottomRight: Radius.circular(15)),
                             color: isMe
-                                ? Colors.purple
-                                : Colors.purple.shade100.withOpacity(0.5),
+                                ? kMeeshoPurple
+                                : kMeeshoPurple.withOpacity(0.1),
                           ),
                           child: !isProduct
                               ? Text(
@@ -251,7 +252,7 @@ class ProductMessageBoxMe extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.remove_red_eye_outlined,
-                              color: Colors.purple,
+                              color: kMeeshoPurple,
                             ),
                             const SizedBox(
                               width: 6,
@@ -259,7 +260,7 @@ class ProductMessageBoxMe extends StatelessWidget {
                             Text(
                               "View Details",
                               style:
-                                  TextStyle(color: Colors.purple, fontSize: 12),
+                                  TextStyle(color: kMeeshoPurple, fontSize: 12),
                             )
                           ],
                         ))
@@ -377,7 +378,7 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                   children: [
                     TextButton.icon(
                         style: TextButton.styleFrom(
-                            backgroundColor: Colors.purple,
+                            backgroundColor: kMeeshoPurple,
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4))),
                         onPressed: () {
@@ -411,7 +412,7 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                               msg: "Product added to group card");
                         },
                         style: OutlinedButton.styleFrom(
-                            side: BorderSide(color: Colors.purple, width: 0.5),
+                            side: BorderSide(color: kMeeshoPurple, width: 0.5),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(4))),
                         child: Row(
@@ -419,13 +420,13 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                           children: [
                             Icon(
                               Icons.add_shopping_cart,
-                              color: Colors.purple,
+                              color: kMeeshoPurple,
                               size: 20,
                             ),
                             Text(
                               "Add to cart",
                               style:
-                                  TextStyle(color: Colors.purple, fontSize: 12),
+                                  TextStyle(color: kMeeshoPurple, fontSize: 12),
                             )
                           ],
                         )),

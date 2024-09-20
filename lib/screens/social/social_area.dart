@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -8,7 +9,10 @@ import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/message.dart';
 
 class SocialArea extends StatefulWidget {
-  const SocialArea({super.key});
+  final Map<String, dynamic> groupSummary;
+  final String groupId;
+  const SocialArea(
+      {super.key, required this.groupId, required this.groupSummary});
 
   @override
   State<SocialArea> createState() => _SocialAreaState();
@@ -20,8 +24,8 @@ class _SocialAreaState extends State<SocialArea> {
 
   void sendMessage() async {
     FocusScope.of(context).unfocus();
-    await FirebaseServices.uploadMessage("fbSH5sqoREa1ZdpK0ShRUUct0mh2",
-        _controller.text, "yT2Q2ospLIF09ggC0O74", "text");
+    await FirebaseServices.uploadMessage(
+        FirebaseServices.getUserId(), _controller.text, widget.groupId, "text");
     _controller.clear();
   }
 
@@ -30,17 +34,18 @@ class _SocialAreaState extends State<SocialArea> {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: const Wrap(
+        title: Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
             CircleAvatar(
               radius: 20.0,
+              child: CachedNetworkImage(imageUrl: widget.groupSummary["image"]),
             ),
             SizedBox(
               width: 12.0,
             ),
             Text(
-              "code_squad",
+              widget.groupSummary["name"],
               style: appBarTextStyle,
             )
           ],
@@ -51,19 +56,21 @@ class _SocialAreaState extends State<SocialArea> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const GamesScreen()));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.videogame_asset_outlined,
                 color: Colors.green,
                 size: 30,
               )),
           IconButton(
               onPressed: () {
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => const GroupCart()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => const ShoppingCart(
+                          isGroupCart: true,
+                        )));
               },
-              icon: Icon(
+              icon: const Icon(
                 Icons.add_shopping_cart_sharp,
-                color: Colors.purple,
+                color: kMeeshoPurple,
                 size: 30.0,
               )),
           const SizedBox(
@@ -73,10 +80,10 @@ class _SocialAreaState extends State<SocialArea> {
       ),
       body: Column(
         children: [
-          const Expanded(
+          Expanded(
               child: MessagePage(
-                  groupId: "yT2Q2ospLIF09ggC0O74",
-                  senderUid: "fbSH5sqoREa1ZdpK0ShRUUct0mh2")),
+                  groupId: widget.groupId,
+                  senderUid: FirebaseServices.getUserId())),
           Container(
             decoration: const BoxDecoration(color: Colors.white),
             child: Padding(
@@ -105,7 +112,7 @@ class _SocialAreaState extends State<SocialArea> {
                   SizedBox(
                     height: 50,
                     child: FloatingActionButton(
-                      backgroundColor: Colors.purple,
+                      backgroundColor: kMeeshoPurple,
                       onPressed: () {
                         if (message != null) {
                           sendMessage();

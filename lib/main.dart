@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meesho_dice/screens/home_page.dart';
 import 'package:meesho_dice/screens/home_screen.dart';
 import 'package:meesho_dice/services/theme.dart';
+import 'package:meesho_dice/wrapper.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme().lightTheme(),
-      home: const HomePage(),
+      home: const Wrapper(),
     );
   }
 }

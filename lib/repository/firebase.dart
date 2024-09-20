@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseServices {
   static Future? uploadMessage(
@@ -39,5 +40,33 @@ class FirebaseServices {
     } on Exception catch (e) {
       print(e.toString());
     }
+  }
+
+  Future<Map<String, dynamic>?> getUserDetails() async {
+    String userId = FirebaseAuth.instance.currentUser!.uid;
+    final userData =
+        await FirebaseFirestore.instance.collection("users").doc(userId).get();
+    return userData.data();
+  }
+
+  static String getUserId() {
+    return FirebaseAuth.instance.currentUser!.uid;
+  }
+
+  Future removeProductFromCart(String docId) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(getUserId())
+        .collection("cart")
+        .doc(docId)
+        .delete();
+  }
+
+  Future addProductToCart(int productId) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(getUserId())
+        .collection("cart")
+        .add({"id": productId});
   }
 }

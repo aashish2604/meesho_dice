@@ -1,4 +1,6 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/screens/social/group_cart.dart';
 import 'package:meesho_dice/screens/social/groups_list.dart';
 import 'package:meesho_dice/screens/social/social_area.dart';
 
@@ -12,6 +14,9 @@ class HomeAppbarLeading extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 26,
+          child: CachedNetworkImage(
+              imageUrl:
+                  "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85"),
         ),
         const SizedBox(
           width: 8.0,
@@ -56,7 +61,12 @@ class HomeAppbarTrailing {
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const ShoppingCart(
+                    isGroupCart: false,
+                  )));
+        },
         icon: const Icon(
           Icons.shopping_cart,
           color: Colors.purple,

@@ -1,16 +1,39 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/services/theme.dart';
+import 'package:meesho_dice/utils/app_consts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class GamesScreen extends StatelessWidget {
+class GamesScreen extends StatefulWidget {
   const GamesScreen({super.key});
+
+  @override
+  State<GamesScreen> createState() => _GamesScreenState();
+}
+
+class _GamesScreenState extends State<GamesScreen> {
+  Map<String, dynamic>? userDetails;
+
+  Future getUserData() async {
+    final userData = await FirebaseServices().getUserDetails();
+    setState(() {
+      userDetails = userData;
+    });
+  }
+
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         scrolledUnderElevation: 0,
-        title: Text(
+        title: const Text(
           "Game Zone",
           style: appBarTextStyle,
         ),
@@ -22,14 +45,18 @@ class GamesScreen extends StatelessWidget {
             Center(
               child: CircleAvatar(
                 radius: 80,
+                child: userDetails == null
+                    ? null
+                    : CachedNetworkImage(imageUrl: userDetails!["image"]),
               ),
             ),
             const SizedBox(
               height: 8.0,
             ),
             Text(
-              "Aashish",
-              style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
+              userDetails == null ? "" : userDetails!["username"],
+              style:
+                  const TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
             ),
             const SizedBox(
               height: 20.0,
@@ -149,7 +176,7 @@ class LeaderboardContainer extends StatelessWidget {
               // ),
               DataTable(
                   // Datatable widget that have the property columns and rows.
-                  columns: [
+                  columns: const [
                     // Set the name of the column
                     DataColumn(
                       label: Text('Game'),

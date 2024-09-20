@@ -142,7 +142,7 @@ class ProductDetails extends StatelessWidget {
                               width: 4.0,
                             ),
                             Text(
-                              "${(details["price"] / (1 - 0.01 * details["discount"])).ceil()}",
+                              "${(details["price"].toDouble() / (1 - 0.01 * (details["discount"].toDouble()))).ceil()}",
                               style: const TextStyle(
                                   decoration: TextDecoration.lineThrough,
                                   fontSize: 16.0,
@@ -223,7 +223,9 @@ class ProductDetails extends StatelessWidget {
               padding: EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
               color: Colors.white,
               width: screenWidth,
-              child: BottomButtonBox(),
+              child: BottomButtonBox(
+                details: details,
+              ),
             ),
           )
         ],
@@ -348,7 +350,8 @@ class VirtualStoreElement extends StatelessWidget {
 }
 
 class BottomButtonBox extends StatelessWidget {
-  const BottomButtonBox({super.key});
+  final Map<String, dynamic> details;
+  const BottomButtonBox({super.key, required this.details});
 
   @override
   Widget build(BuildContext context) {
@@ -356,7 +359,10 @@ class BottomButtonBox extends StatelessWidget {
       children: [
         Expanded(
           child: OutlinedButton(
-              onPressed: () {},
+              onPressed: () async {
+                await FirebaseServices().addProductToCart(details['id']);
+                Fluttertoast.showToast(msg: "Product added to cart");
+              },
               style: OutlinedButton.styleFrom(
                   side: BorderSide(color: Colors.purple),
                   shape: RoundedRectangleBorder(

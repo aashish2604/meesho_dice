@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/home_tabs/account.dart';
 import 'package:meesho_dice/screens/home_tabs/home_tab.dart';
 import 'package:meesho_dice/screens/home_tabs/order_tab.dart';
@@ -13,6 +14,21 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  Map<String, dynamic>? userDetails;
+
+  Future getUserData() async {
+    final userData = await FirebaseServices().getUserDetails();
+    setState(() {
+      userDetails = userData;
+    });
+  }
+
+  @override
+  void initState() {
+    getUserData();
+    super.initState();
+  }
+
   int _selectedIndex = 0;
   static const TextStyle optionStyle =
       TextStyle(fontSize: 30, fontWeight: FontWeight.bold);
@@ -36,9 +52,10 @@ class _HomePageState extends State<HomePage> {
           child: AppBar(
             // backgroundColor: Colors.white,
             scrolledUnderElevation: 0,
-            title: const HomeAppbarLeading(userName: "userName"),
+            title: HomeAppbarLeading(
+                userName: userDetails == null ? "" : userDetails!["username"]),
             actions: HomeAppbarTrailing().getAppBarActions(context),
-            bottom: PreferredSize(
+            bottom: const PreferredSize(
                 preferredSize: Size.fromHeight(12),
                 child: Padding(
                   padding: const EdgeInsets.only(left: 16.0, right: 16.0),
