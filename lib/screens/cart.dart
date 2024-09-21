@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/wishlist.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/cart_tile.dart';
@@ -100,17 +101,28 @@ class ShoppingCart extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           height: 60,
                           color: Colors.white,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Wishlist",
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              const Expanded(child: SizedBox()),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.arrow_forward_ios))
-                            ],
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const Wishlist()));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Wishlist",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Wishlist()));
+                                    },
+                                    icon: Icon(Icons.arrow_forward_ios))
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -144,7 +156,10 @@ class ShoppingCart extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                         borderRadius: BorderRadius.circular(4)),
                                     backgroundColor: Colors.purple),
-                                onPressed: () {},
+                                onPressed: () {
+                                  FirebaseServices()
+                                      .placeOrderFromCart(documents);
+                                },
                                 child: const Text(
                                   "Buy Now",
                                   style: TextStyle(color: Colors.white),

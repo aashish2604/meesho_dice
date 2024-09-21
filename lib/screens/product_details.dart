@@ -390,7 +390,11 @@ class BottomButtonBox extends StatelessWidget {
                   backgroundColor: Colors.purple,
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(4))),
-              onPressed: () {},
+              onPressed: () async {
+                await FirebaseServices()
+                    .addSingleItemToOrders(details['id'], false);
+                Fluttertoast.showToast(msg: "Order Placed");
+              },
               label: Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [

@@ -7,7 +7,17 @@ class AccountTab extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text("account"),
+        child: TextButton(
+          onPressed: () {},
+          child: Text(
+            "logout",
+            style: TextStyle(color: Colors.white),
+          ),
+          style: TextButton.styleFrom(
+              backgroundColor: Colors.purple,
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(4))),
+        ),
       ),
     );
   }

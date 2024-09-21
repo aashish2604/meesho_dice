@@ -48,19 +48,22 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: PreferredSize(
-          preferredSize: Size.fromHeight(118),
+          preferredSize:
+              _selectedIndex == 0 ? Size.fromHeight(118) : Size.fromHeight(60),
           child: AppBar(
             // backgroundColor: Colors.white,
             scrolledUnderElevation: 0,
             title: HomeAppbarLeading(
                 userName: userDetails == null ? "" : userDetails!["username"]),
             actions: HomeAppbarTrailing().getAppBarActions(context),
-            bottom: const PreferredSize(
-                preferredSize: Size.fromHeight(12),
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 16.0, right: 16.0),
-                  child: HomeAppbarSearch(),
-                )),
+            bottom: _selectedIndex == 0
+                ? const PreferredSize(
+                    preferredSize: Size.fromHeight(12),
+                    child: Padding(
+                      padding: const EdgeInsets.only(left: 16.0, right: 16.0),
+                      child: HomeAppbarSearch(),
+                    ))
+                : null,
           ),
         ),
         body: Center(

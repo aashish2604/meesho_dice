@@ -3,6 +3,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/cart.dart';
+import 'package:meesho_dice/screens/wishlist.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/cart_tile.dart';
@@ -111,17 +112,28 @@ class GroupShoppingCart extends StatelessWidget {
                           padding: EdgeInsets.symmetric(horizontal: 16),
                           height: 60,
                           color: Colors.white,
-                          child: Row(
-                            children: [
-                              Text(
-                                "Wishlist",
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              const Expanded(child: SizedBox()),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: Icon(Icons.arrow_forward_ios))
-                            ],
+                          child: GestureDetector(
+                            onTap: () {
+                              Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => const Wishlist()));
+                            },
+                            child: Row(
+                              children: [
+                                Text(
+                                  "Wishlist",
+                                  style: TextStyle(fontWeight: FontWeight.w500),
+                                ),
+                                const Expanded(child: SizedBox()),
+                                IconButton(
+                                    onPressed: () {
+                                      Navigator.of(context).push(
+                                          MaterialPageRoute(
+                                              builder: (context) =>
+                                                  const Wishlist()));
+                                    },
+                                    icon: Icon(Icons.arrow_forward_ios))
+                              ],
+                            ),
                           ),
                         ),
                         const SizedBox(
@@ -137,37 +149,45 @@ class GroupShoppingCart extends StatelessWidget {
                       ],
                     ),
                   ),
-                  Positioned(
-                    bottom: 0,
-                    child: Container(
-                      padding: EdgeInsets.symmetric(
-                          horizontal: 20.0, vertical: 10.0),
-                      color: Colors.white,
-                      width: MediaQuery.of(context).size.width,
-                      child: Container(
-                        child: Row(
-                          children: [
-                            Text(
-                              "₹ ${getAmount(documents) - getDiscount(documents) + 24}",
-                              style: TextStyle(
-                                  fontSize: 20, fontWeight: FontWeight.bold),
+                  getAmount(documents) == 0
+                      ? const SizedBox.shrink()
+                      : Positioned(
+                          bottom: 0,
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 20.0, vertical: 10.0),
+                            color: Colors.white,
+                            width: MediaQuery.of(context).size.width,
+                            child: Container(
+                              child: Row(
+                                children: [
+                                  Text(
+                                    "₹ ${getAmount(documents) - getDiscount(documents) + 24}",
+                                    style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                  const Expanded(child: SizedBox()),
+                                  TextButton(
+                                      style: TextButton.styleFrom(
+                                          shape: RoundedRectangleBorder(
+                                              borderRadius:
+                                                  BorderRadius.circular(4)),
+                                          backgroundColor: Colors.purple),
+                                      onPressed: () {
+                                        FirebaseServices()
+                                            .placeOrderFromGroupCart(
+                                                documents, groupId);
+                                      },
+                                      child: const Text(
+                                        "Buy Now",
+                                        style: TextStyle(color: Colors.white),
+                                      ))
+                                ],
+                              ),
                             ),
-                            const Expanded(child: SizedBox()),
-                            TextButton(
-                                style: TextButton.styleFrom(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(4)),
-                                    backgroundColor: Colors.purple),
-                                onPressed: () {},
-                                child: const Text(
-                                  "Buy Now",
-                                  style: TextStyle(color: Colors.white),
-                                ))
-                          ],
-                        ),
-                      ),
-                    ),
-                  )
+                          ),
+                        )
                 ],
               );
             }
@@ -229,48 +249,51 @@ class GroupCartPriceBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const SizedBox(
-            height: 10,
-          ),
-          Text(
-            "Price Details (${getYourOrderCount(responseData)} Items)",
-            style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-          ),
-          const SizedBox(
-            height: 22.0,
-          ),
-          CartPriceDetailsRow(
-              title: "Total Product Price",
-              amount: getAmount(responseData).toString(),
-              isDiscount: false),
-          CartPriceDetailsRow(
-              title: "Total Discounts",
-              amount: getDiscount(responseData).toString(),
-              isDiscount: true),
-          const CartPriceDetailsRow(
-              title: "Additional Fees", amount: "24", isDiscount: false),
-          const Divider(
-            thickness: 1.5,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          CartPriceDetailsRow(
-            title: "Order Total",
-            amount: (getAmount(responseData) - getDiscount(responseData) + 24)
-                .toString(),
-            isDiscount: false,
-            isTotal: true,
-          )
-        ],
-      ),
-    );
+    return getYourOrderCount(responseData) == 0
+        ? const SizedBox.shrink()
+        : Container(
+            color: Colors.white,
+            padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "Price Details (${getYourOrderCount(responseData)} Items)",
+                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                ),
+                const SizedBox(
+                  height: 22.0,
+                ),
+                CartPriceDetailsRow(
+                    title: "Total Product Price",
+                    amount: getAmount(responseData).toString(),
+                    isDiscount: false),
+                CartPriceDetailsRow(
+                    title: "Total Discounts",
+                    amount: getDiscount(responseData).toString(),
+                    isDiscount: true),
+                const CartPriceDetailsRow(
+                    title: "Additional Fees", amount: "24", isDiscount: false),
+                const Divider(
+                  thickness: 1.5,
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                CartPriceDetailsRow(
+                  title: "Order Total",
+                  amount:
+                      (getAmount(responseData) - getDiscount(responseData) + 24)
+                          .toString(),
+                  isDiscount: false,
+                  isTotal: true,
+                )
+              ],
+            ),
+          );
   }
 }
 
@@ -378,7 +401,6 @@ class GroupCartProductDetails extends StatelessWidget {
       required this.productDocId,
       required this.productInteractionDetails,
       required this.groupId});
-
   @override
   Widget build(BuildContext context) {
     String userId = FirebaseServices.getUserId();
@@ -440,7 +462,14 @@ class GroupCartProductDetails extends StatelessWidget {
             SizedBox(
               width: 4.0,
             ),
-            Text("${productInteractionDetails["no_of_likes"]}")
+            Text("${productInteractionDetails["no_of_likes"]}"),
+            const SizedBox(
+              width: 20.0,
+            ),
+            GroupCartDiscountChip(
+              groupId: groupId,
+              numberOfLikes: productInteractionDetails["no_of_likes"],
+            )
           ],
         ),
         !isMyAddition
@@ -466,5 +495,55 @@ class GroupCartProductDetails extends StatelessWidget {
                 ))
       ],
     );
+  }
+}
+
+class GroupCartDiscountChip extends StatelessWidget {
+  final String groupId;
+  final int numberOfLikes;
+  const GroupCartDiscountChip(
+      {super.key, required this.groupId, required this.numberOfLikes});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("groups")
+            .doc(groupId)
+            .collection("members")
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final docs = snapshot.data!.docs;
+            int likesThreshold = (docs.length / 2).floor();
+            if (numberOfLikes > likesThreshold) {
+              return Container(
+                padding: EdgeInsets.only(top: 2, bottom: 2, right: 10, left: 5),
+                decoration: BoxDecoration(
+                    color: Colors.deepPurple,
+                    borderRadius: BorderRadius.circular(30.0)),
+                child: const Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Icon(
+                      Icons.check,
+                      size: 14,
+                      color: Colors.white,
+                    ),
+                    const SizedBox(
+                      width: 4,
+                    ),
+                    Text(
+                      "Group Discount",
+                      style: TextStyle(color: Colors.white, fontSize: 10),
+                    )
+                  ],
+                ),
+              );
+            }
+          }
+          return const SizedBox.shrink();
+        });
   }
 }

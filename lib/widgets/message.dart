@@ -132,6 +132,7 @@ class ProductMessageBoxMe extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> details =
         productData.singleWhere((element) => element["id"] == productId);
+    var noOfLikes = 0;
     return Column(
       children: [
         Container(
@@ -204,6 +205,7 @@ class ProductMessageBoxMe extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               final data = snapshot.data!.docs;
+                              noOfLikes = data.length;
                               bool isLikedByMe() {
                                 for (var i in data) {
                                   if (i.id == FirebaseServices.getUserId()) {
@@ -229,7 +231,10 @@ class ProductMessageBoxMe extends StatelessWidget {
                                             )
                                           : const Icon(
                                               Icons.favorite_border_outlined)),
-                                  Text("${data.length}"),
+                                  Text(
+                                    "${data.length}",
+                                    style: TextStyle(color: Colors.white),
+                                  ),
                                 ],
                               );
                             }
@@ -267,7 +272,10 @@ class ProductMessageBoxMe extends StatelessWidget {
                     OutlinedButton(
                         onPressed: () async {
                           await FirebaseServices().addProductToGroupCart(
-                              productId, FirebaseServices.getUserId(), groupId);
+                              productId,
+                              FirebaseServices.getUserId(),
+                              groupId,
+                              noOfLikes);
                           Fluttertoast.showToast(
                               msg: "Product added to group cart");
                         },
@@ -346,6 +354,7 @@ class ProductMessageBoxNotMe extends StatelessWidget {
   Widget build(BuildContext context) {
     Map<String, dynamic> details =
         productData.singleWhere((element) => element["id"] == productId);
+    var noOfLikes = 0;
     return Column(
       children: [
         Container(
@@ -407,6 +416,7 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                           builder: (context, snapshot) {
                             if (snapshot.hasData) {
                               final data = snapshot.data!.docs;
+                              noOfLikes = data.length;
                               bool isLikedByMe() {
                                 for (var i in data) {
                                   if (i.id == FirebaseServices.getUserId()) {
@@ -512,7 +522,10 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                     OutlinedButton(
                         onPressed: () async {
                           await FirebaseServices().addProductToGroupCart(
-                              productId, FirebaseServices.getUserId(), groupId);
+                              productId,
+                              FirebaseServices.getUserId(),
+                              groupId,
+                              noOfLikes);
                           Fluttertoast.showToast(
                               msg: "Product added to group cart");
                         },

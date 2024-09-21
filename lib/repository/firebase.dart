@@ -80,7 +80,7 @@ class FirebaseServices {
   }
 
   Future addProductToGroupCart(
-      int productId, String adderId, String groupId) async {
+      int productId, String adderId, String groupId, int noOfLikes) async {
     final userDetails = await getUserDetails();
     await FirebaseFirestore.instance
         .collection("groups")
@@ -89,7 +89,8 @@ class FirebaseServices {
         .add({
       "id": productId,
       "adder_id": adderId,
-      "adder_name": userDetails!["username"]
+      "adder_name": userDetails!["username"],
+      "no_of_likes": noOfLikes
     });
     print("something");
   }
@@ -114,6 +115,38 @@ class FirebaseServices {
           .collection("likes")
           .doc(getUserId())
           .set({});
+    }
+  }
+
+  Future addSingleItemToOrders(int productId, bool isGroupCartOrder) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(getUserId())
+        .collection("orders")
+        .add({
+      "timestamp": DateTime.now(),
+      "product_id": productId,
+      "is_group_cart_order": isGroupCartOrder
+    });
+  }
+
+  Future placeOrderFromGroupCart(
+      List<QueryDocumentSnapshot<Object?>> documents, String groupId) async {
+    for (var doc in documents) {
+      final docData = doc.data() as Map<String, dynamic>;
+      if (getUserId() == docData["adder_id"]) {
+        await addSingleItemToOrders(docData["id"], true);
+        await removeProductFromGroupCart(groupId, doc.id);
+      }
+    }
+  }
+
+  Future placeOrderFromCart(
+      List<QueryDocumentSnapshot<Object?>> documents) async {
+    for (var doc in documents) {
+      final docData = doc.data() as Map<String, dynamic>;
+      await addSingleItemToOrders(docData["id"], false);
+      await removeProductFromCart(doc.id);
     }
   }
 }

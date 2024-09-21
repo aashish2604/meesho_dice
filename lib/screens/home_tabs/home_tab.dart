@@ -1,9 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/product_details.dart';
+import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/category_box.dart';
+import 'package:meesho_dice/widgets/loading.dart';
 import 'package:meesho_dice/widgets/product_box.dart';
+import 'package:meesho_dice/widgets/timer.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -15,6 +21,7 @@ class HomeTab extends StatelessWidget {
       child: Column(
         children: [
           PolicyContainer(),
+          PersonalizedProducts(),
           CategorySection(),
           OfferCarousal(),
           const SizedBox(
@@ -63,15 +70,37 @@ class CategorySection extends StatelessWidget {
       height: 100,
       child: ListView(
         scrollDirection: Axis.horizontal,
-        children: [
-          CategoryBox(image: "image", title: "Electronics"),
-          CategoryBox(image: "image", title: "Home Appliances"),
-          CategoryBox(image: "image", title: "Clothing"),
-          CategoryBox(image: "image", title: "Kids"),
-          CategoryBox(image: "image", title: "Shoes"),
-          CategoryBox(image: "image", title: "Sports"),
-          CategoryBox(image: "image", title: "Clothing"),
-          CategoryBox(image: "image", title: "Clothing"),
+        children: const [
+          CategoryBox(
+            image: "image",
+            title: "Electronics",
+            category: "electronics",
+          ),
+          CategoryBox(
+            image: "image",
+            title: "Home",
+            category: "home",
+          ),
+          CategoryBox(
+            image: "image",
+            title: "Clothing",
+            category: "cloths",
+          ),
+          CategoryBox(
+            image: "image",
+            title: "Kids",
+            category: "kids",
+          ),
+          CategoryBox(
+            image: "image",
+            title: "Shoes",
+            category: "shoes",
+          ),
+          CategoryBox(
+            image: "image",
+            title: "Sports",
+            category: "sports",
+          )
         ],
       ),
     );
@@ -171,5 +200,155 @@ class ProductsForYouBody extends StatelessWidget {
             details: productData[index],
           );
         });
+  }
+}
+
+class PersonalizedProducts extends StatelessWidget {
+  const PersonalizedProducts({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return StreamBuilder(
+        stream: FirebaseFirestore.instance
+            .collection("users")
+            .doc(FirebaseServices.getUserId())
+            .snapshots(),
+        builder: (context, snapshot) {
+          if (snapshot.hasData) {
+            final documents = snapshot.data!.data();
+            final personalizedOffers =
+                documents!["personalized_offers"] as List;
+            return personalizedOffers.isNotEmpty
+                ? Container(
+                    color: Colors.white,
+                    padding: EdgeInsets.only(top: 12.0),
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+                          child: Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [
+                              Text(
+                                "Offers just for you",
+                                style: TextStyle(
+                                    fontSize: 18, fontWeight: FontWeight.w500),
+                              ),
+                              const SizedBox(
+                                width: 14.0,
+                              ),
+                              TimerBox(
+                                  endTime:
+                                      DateTime.now().add(Duration(hours: 3)))
+                            ],
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 10.0,
+                        ),
+                        SizedBox(
+                          height: 150,
+                          child: ListView.builder(
+                              scrollDirection: Axis.horizontal,
+                              itemCount: personalizedOffers.length,
+                              itemBuilder: (context, index) {
+                                Map<String, dynamic> details =
+                                    productData.firstWhere((e) =>
+                                        e["id"] == personalizedOffers[index]);
+                                return GestureDetector(
+                                  onTap: () {
+                                    Navigator.of(context).push(
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                ProductDetails(
+                                                    details: details)));
+                                  },
+                                  child: Container(
+                                    height: 150,
+                                    width: 130,
+                                    child: Column(
+                                      children: [
+                                        Padding(
+                                          padding:
+                                              const EdgeInsets.only(left: 16),
+                                          child: Container(
+                                            width: 120,
+                                            height: 120,
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(16.0),
+                                                border: Border.all(
+                                                    color: Colors.black,
+                                                    width: 1),
+                                                image: DecorationImage(
+                                                    fit: BoxFit.fill,
+                                                    image:
+                                                        CachedNetworkImageProvider(
+                                                            details["images"]
+                                                                [0]))),
+                                          ),
+                                        ),
+                                        const SizedBox(
+                                          height: 2.0,
+                                        ),
+                                        Text(
+                                          details["title_name"],
+                                          overflow: TextOverflow.ellipsis,
+                                          style: TextStyle(
+                                              fontSize: 12,
+                                              fontWeight: FontWeight.w600),
+                                        )
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              }),
+                        ),
+                      ],
+                    ),
+                  )
+                : const SizedBox.shrink();
+          }
+          return const SizedBox.shrink();
+        });
+  }
+}
+
+class PersonalizedProductBox extends StatelessWidget {
+  final Map<String, dynamic> details;
+  const PersonalizedProductBox({super.key, required this.details});
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: () {
+        Navigator.of(context).push(MaterialPageRoute(
+            builder: (context) => ProductDetails(details: details)));
+      },
+      child: Container(
+        height: 120,
+        width: 100,
+        child: Column(
+          children: [
+            Container(
+              width: 100,
+              height: 80,
+              decoration: BoxDecoration(
+                  image: DecorationImage(
+                      fit: BoxFit.fill,
+                      image: CachedNetworkImageProvider(details["images"][0]))),
+            ),
+            const SizedBox(
+              height: 6.0,
+            ),
+            Text(
+              details["title_name"],
+              overflow: TextOverflow.ellipsis,
+            )
+          ],
+        ),
+      ),
+    );
   }
 }

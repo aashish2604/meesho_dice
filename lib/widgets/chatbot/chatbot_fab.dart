@@ -88,6 +88,7 @@ class _ChatBotFabState extends State<ChatBotFab>
                   ? FadeTransition(
                       opacity: _fadeInAnimation,
                       child: Card(
+                        color: Colors.purple,
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(16),
@@ -101,7 +102,8 @@ class _ChatBotFabState extends State<ChatBotFab>
                           child: Center(
                             child: Text(
                               widget.initMessage,
-                              style: TextStyle(fontSize: 12),
+                              style:
+                                  TextStyle(fontSize: 12, color: Colors.white),
                             ),
                           ),
                         ),

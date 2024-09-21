@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meesho_dice/screens/cart.dart';
 import 'package:meesho_dice/screens/social/groups_list.dart';
 import 'package:meesho_dice/screens/social/social_area.dart';
+import 'package:meesho_dice/screens/wishlist.dart';
 
 class HomeAppbarLeading extends StatelessWidget {
   final String userName;
@@ -54,7 +55,10 @@ class HomeAppbarTrailing {
         ),
       ),
       IconButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.of(context)
+              .push(MaterialPageRoute(builder: (context) => const Wishlist()));
+        },
         icon: const Icon(
           Icons.favorite,
           color: Colors.red,
@@ -87,6 +91,7 @@ class HomeAppbarSearch extends StatelessWidget {
     return Padding(
         padding: const EdgeInsets.all(8.0),
         child: TextField(
+          readOnly: true,
           decoration: InputDecoration(
             contentPadding: const EdgeInsets.all(0),
             hintText: 'Search...',
