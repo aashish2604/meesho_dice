@@ -5,6 +5,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/screens/immersive/virtual_tryon_output.dart';
 import 'package:meesho_dice/services/theme.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 
 class VirtualTryOnInput extends StatefulWidget {
   final String clothImage;
@@ -32,6 +33,10 @@ class _VirtualTryOnInputState extends State<VirtualTryOnInput> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const ChatBotFab(
+          initMessage:
+              "Upload your clear front-facing image without full-sleeve cloth to get the best results",
+          containerLifeInSeconds: 14),
       appBar: AppBar(
         title: Text(
           "Virtual Try-on",

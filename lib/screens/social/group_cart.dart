@@ -7,6 +7,7 @@ import 'package:meesho_dice/screens/wishlist.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/product_data.dart';
 import 'package:meesho_dice/widgets/cart_tile.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:meesho_dice/widgets/loading.dart';
 
 class GroupShoppingCart extends StatelessWidget {
@@ -58,6 +59,13 @@ class GroupShoppingCart extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: Padding(
+        padding: const EdgeInsets.only(bottom: 60),
+        child: const ChatBotFab(
+            initMessage:
+                'You get an extra "Group Discount" if your item has more likes than 50% group strength',
+            containerLifeInSeconds: 10),
+      ),
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: const Text(
@@ -144,8 +152,8 @@ class GroupShoppingCart extends StatelessWidget {
                           responseData: documents,
                         ),
                         SizedBox(
-                          height: 80,
-                        ),
+                          height: 150,
+                        )
                       ],
                     ),
                   ),

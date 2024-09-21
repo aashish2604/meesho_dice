@@ -10,6 +10,8 @@ import 'package:ar_flutter_plugin/datatypes/node_types.dart';
 import 'package:ar_flutter_plugin/datatypes/hittest_result_types.dart';
 import 'package:ar_flutter_plugin/models/ar_node.dart';
 import 'package:ar_flutter_plugin/models/ar_hittest_result.dart';
+import 'package:meesho_dice/services/theme.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:vector_math/vector_math_64.dart';
 import 'dart:math';
 
@@ -37,8 +39,19 @@ class _AugmentedRealityViewState extends State<AugmentedRealityView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: Padding(
+          padding: const EdgeInsets.only(bottom: 70),
+          child: ChatBotFab(
+              messageBoxWidth: 200,
+              initMessage:
+                  "Steps:\n 1.Scan the area until you find planes which are indicated by mesh\n 2.Tap on the mesh to place the object\n 3.Now tap on it to change it position or rotate it",
+              containerLifeInSeconds: 16),
+        ),
         appBar: AppBar(
-          title: const Text('Object Transformation Gestures'),
+          title: const Text(
+            'Augmented Reality Zone',
+            style: appBarTextStyle,
+          ),
         ),
         body: Container(
             child: Stack(children: [

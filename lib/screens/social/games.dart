@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/utils/app_consts.dart';
+import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class GamesScreen extends StatefulWidget {
@@ -31,6 +32,10 @@ class _GamesScreenState extends State<GamesScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      floatingActionButton: const ChatBotFab(
+          initMessage:
+              "Be on the top of the leaderboard to win exclusive rewards",
+          containerLifeInSeconds: 6),
       appBar: AppBar(
         scrolledUnderElevation: 0,
         title: const Text(

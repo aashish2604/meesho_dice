@@ -150,58 +150,66 @@ class MessageArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: ListView.builder(
-          controller: scrollController,
-          itemCount: chatbotChats.length,
-          itemBuilder: (context, index) {
-            // return Text(chatbotChats[index]["message"].text?.text?.first);
-            bool isMe = chatbotChats[index]["isUserMessage"];
-            return Row(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment:
-                  isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
-              children: [
-                !isMe
-                    ? Padding(
-                        padding: EdgeInsets.only(left: 6, top: 10),
-                        child: CircleAvatar(
-                          radius: 20.0,
-                          backgroundImage:
-                              AssetImage("assets/images/chatbot.png"),
+    return chatbotChats.isEmpty
+        ? Expanded(
+            child: const Center(
+              child: Text("Ask Something"),
+            ),
+          )
+        : Expanded(
+            child: ListView.builder(
+                controller: scrollController,
+                itemCount: chatbotChats.length,
+                itemBuilder: (context, index) {
+                  // return Text(chatbotChats[index]["message"].text?.text?.first);
+                  bool isMe = chatbotChats[index]["isUserMessage"];
+                  return Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment:
+                        isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
+                    children: [
+                      !isMe
+                          ? Padding(
+                              padding: EdgeInsets.only(left: 6, top: 10),
+                              child: CircleAvatar(
+                                radius: 20.0,
+                                backgroundImage:
+                                    AssetImage("assets/images/chatbot.png"),
+                              ),
+                            )
+                          : SizedBox(
+                              height: 0,
+                              width: 0,
+                            ),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        margin: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints(maxWidth: 300),
+                        decoration: BoxDecoration(
+                          borderRadius: isMe
+                              ? const BorderRadius.only(
+                                  topLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                  bottomLeft: Radius.circular(15))
+                              : const BorderRadius.only(
+                                  bottomLeft: Radius.circular(15),
+                                  topRight: Radius.circular(15),
+                                  bottomRight: Radius.circular(15)),
+                          color: isMe
+                              ? Colors.purple
+                              : Colors.purple.shade100.withOpacity(0.5),
                         ),
+                        child: ChatBubbleContent(
+                            isMe: isMe,
+                            message: chatbotChats[index]["message"]
+                                .text
+                                ?.text
+                                ?.first),
                       )
-                    : SizedBox(
-                        height: 0,
-                        width: 0,
-                      ),
-                Container(
-                  padding: const EdgeInsets.all(10),
-                  margin: const EdgeInsets.all(8),
-                  constraints: const BoxConstraints(maxWidth: 300),
-                  decoration: BoxDecoration(
-                    borderRadius: isMe
-                        ? const BorderRadius.only(
-                            topLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomLeft: Radius.circular(15))
-                        : const BorderRadius.only(
-                            bottomLeft: Radius.circular(15),
-                            topRight: Radius.circular(15),
-                            bottomRight: Radius.circular(15)),
-                    color: isMe
-                        ? Colors.purple
-                        : Colors.purple.shade100.withOpacity(0.5),
-                  ),
-                  child: ChatBubbleContent(
-                      isMe: isMe,
-                      message:
-                          chatbotChats[index]["message"].text?.text?.first),
-                )
-              ],
-            );
-          }),
-    );
+                    ],
+                  );
+                }),
+          );
   }
 }
 

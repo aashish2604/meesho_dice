@@ -251,7 +251,7 @@ class ProductDetails extends StatelessWidget {
         child: const ChatBotFab(
             initMessage:
                 "Place order between 8PM to 11PM to get personalized discount on this product",
-            containerLifeInSeconds: 6),
+            containerLifeInSeconds: 10),
       ),
     );
   }

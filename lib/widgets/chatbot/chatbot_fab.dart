@@ -8,8 +8,10 @@ class ChatBotFab extends StatefulWidget {
   final String initMessage;
   final int startingDelayInSeconds;
   final int containerLifeInSeconds;
+  final double messageBoxWidth;
   const ChatBotFab(
       {super.key,
+      this.messageBoxWidth = 120.0,
       required this.initMessage,
       this.startingDelayInSeconds = 2,
       required this.containerLifeInSeconds});
@@ -99,7 +101,7 @@ class _ChatBotFabState extends State<ChatBotFab>
                         key: ValueKey(1),
                         child: Container(
                           padding: EdgeInsets.all(12.0),
-                          width: 120,
+                          width: widget.messageBoxWidth,
                           child: Center(
                             child: Text(
                               widget.initMessage,
