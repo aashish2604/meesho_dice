@@ -5,6 +5,7 @@ import 'package:meesho_dice/screens/immersive/augmented_reality.dart';
 import 'package:meesho_dice/screens/immersive/virtual_tryon_input.dart';
 import 'package:meesho_dice/screens/model_3d_view.dart';
 import 'package:meesho_dice/services/general_functions.dart';
+import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:meesho_dice/widgets/circular_iconbutton.dart';
 import 'package:meesho_dice/widgets/image_carousal.dart';
@@ -206,12 +207,26 @@ class ProductDetails extends StatelessWidget {
                             )
                           ],
                         ),
-                        const SizedBox(
-                          height: 100,
-                          width: 100,
-                        )
                       ],
                     ),
+                  ),
+                  const SizedBox(
+                    height: 12,
+                  ),
+                  Container(
+                    height: 12,
+                    color: kCatsKillWhiteColor,
+                  ),
+                  SellerDetailsBox(
+                    details: details,
+                  ),
+                  Container(
+                    height: 12,
+                    color: kCatsKillWhiteColor,
+                  ),
+                  DetailsBox(details: details),
+                  const SizedBox(
+                    height: 100,
                   ),
                 ],
               ),
@@ -489,6 +504,173 @@ class _SocialGroupBottomsheetState extends State<SocialGroupBottomsheet> {
                 )
               ],
             ),
+    );
+  }
+}
+
+class SellerDetailsBox extends StatelessWidget {
+  final Map<String, dynamic> details;
+  const SellerDetailsBox({super.key, required this.details});
+
+  Widget getWidgets(Widget head, String subtitle) {
+    return Column(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        head,
+        const SizedBox(
+          height: 8.0,
+        ),
+        Text(
+          subtitle,
+          style: TextStyle(
+              fontSize: 14, color: Colors.black45, fontWeight: FontWeight.w500),
+        )
+      ],
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Sold by",
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+          ),
+          const SizedBox(
+            height: 22.0,
+          ),
+          Row(
+            children: [
+              CircleAvatar(),
+              const SizedBox(
+                width: 12.0,
+              ),
+              Text(
+                details["seller_details"]["name"],
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+              ),
+            ],
+          ),
+          const SizedBox(
+            height: 20.0,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              getWidgets(
+                  Text(
+                    details["seller_details"]["followers"].toString(),
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
+                  ),
+                  "Followers"),
+              getWidgets(
+                  Text(details["seller_details"]["products"].toString(),
+                      style:
+                          TextStyle(fontSize: 16, fontWeight: FontWeight.w500)),
+                  "Products"),
+              getWidgets(RatingBox(rating: details["seller_details"]["rating"]),
+                  "12K ratings"),
+            ],
+          ),
+          const SizedBox(
+            height: 20.0,
+          )
+        ],
+      ),
+    );
+  }
+}
+
+class DetailsBox extends StatelessWidget {
+  final Map<String, dynamic> details;
+  const DetailsBox({super.key, required this.details});
+
+  Widget getKeyValueWidget(String key, String value, BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 4.0),
+      child: Row(
+        children: [
+          Text(
+            "$key:",
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          SizedBox(
+            width: 10,
+          ),
+          Text(value)
+        ],
+      ),
+    );
+  }
+
+  List<Widget> getKeyValueList(
+      Map<String, dynamic> data, BuildContext context) {
+    List<Widget> response = [];
+    data.forEach((key, value) {
+      if (value is int) {
+        value = value.toString();
+      }
+      response.add(getKeyValueWidget(key, value, context));
+    });
+    return response;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.white,
+      padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 10),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            "Product Details",
+            style: TextStyle(fontWeight: FontWeight.w700, fontSize: 18),
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          Divider(),
+          const SizedBox(
+            height: 4.0,
+          ),
+          Text("Highlights",
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Column(
+              children:
+                  getKeyValueList(details["product_highlights"], context)),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Divider(),
+          const SizedBox(
+            height: 4.0,
+          ),
+          Text("Additional Details",
+              style: TextStyle(fontWeight: FontWeight.w400, fontSize: 16)),
+          const SizedBox(
+            height: 16.0,
+          ),
+          Column(
+              children: getKeyValueList(details["additional_details"], context))
+        ],
+      ),
     );
   }
 }

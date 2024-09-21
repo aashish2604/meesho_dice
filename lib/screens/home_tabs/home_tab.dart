@@ -22,8 +22,11 @@ class HomeTab extends StatelessWidget {
         children: [
           PolicyContainer(),
           PersonalizedProducts(),
-          CategorySection(),
           OfferCarousal(),
+          const SizedBox(
+            height: 6.0,
+          ),
+          CategorySection(),
           const SizedBox(
             height: 6,
           ),
@@ -50,9 +53,11 @@ class PolicyContainer extends StatelessWidget {
       padding: const EdgeInsets.all(10.0),
       child: Container(
         decoration: BoxDecoration(
-          borderRadius: BorderRadius.circular(12.0),
-          color: Colors.white,
-        ),
+            borderRadius: BorderRadius.circular(12.0),
+            color: Colors.white,
+            image: DecorationImage(
+                fit: BoxFit.fill,
+                image: AssetImage("assets/images/policy_banner.jpg"))),
         child: Row(
           children: [],
         ),
