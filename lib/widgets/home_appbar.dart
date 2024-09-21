@@ -1,9 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/cart.dart';
 import 'package:meesho_dice/screens/social/groups_list.dart';
 import 'package:meesho_dice/screens/social/social_area.dart';
 import 'package:meesho_dice/screens/wishlist.dart';
+import 'package:meesho_dice/services/theme.dart';
 
 class HomeAppbarLeading extends StatelessWidget {
   final String userName;
@@ -26,7 +29,7 @@ class HomeAppbarLeading extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Hello",
+              "Hello,",
               style: TextStyle(fontSize: 16.0),
             ),
             Text(
@@ -48,11 +51,7 @@ class HomeAppbarTrailing {
           Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const SocialGroupList()));
         },
-        icon: const Icon(
-          Icons.group,
-          size: 28,
-          color: Colors.blue,
-        ),
+        icon: Image.asset(height: 34, "assets/images/icons8-users-94.png"),
       ),
       IconButton(
         onPressed: () {
@@ -75,6 +74,39 @@ class HomeAppbarTrailing {
           Icons.shopping_cart,
           color: Colors.purple,
         ),
+      ),
+      Stack(
+        children: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => const SocialGroupList()));
+            },
+            icon: Image.asset(height: 26, "assets/images/coin.png"),
+          ),
+          Positioned(
+              right: 3,
+              top: 0,
+              child: CircleAvatar(
+                radius: 10,
+                backgroundColor: Colors.yellow,
+                child: StreamBuilder(
+                    stream: FirebaseFirestore.instance
+                        .collection("users")
+                        .doc(FirebaseServices.getUserId())
+                        .snapshots(),
+                    builder: (context, snapshot) {
+                      return Text(
+                        snapshot.hasData
+                            ? ((snapshot.data!.data()
+                                    as Map<String, dynamic>)["coins"]
+                                .toString())
+                            : "0",
+                        style: TextStyle(fontSize: 10),
+                      );
+                    }),
+              ))
+        ],
       ),
       const SizedBox(
         width: 12.0,

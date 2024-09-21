@@ -1,50 +1,46 @@
 List<Map<String, dynamic>> productData = [
   {
-    "id": 1,
-    "title_name": "White Blazer",
-    "descriptive_name":
-        "GARBY CLUB WHITE colorblocked regular fit Blazer for men",
-    "price": 7800,
-    "discount": 25,
+    "id": 6,
+    "title_name": "VIBE-NITR speaker",
+    "descriptive_name": "MULTICOLOURED vibe nitr speaker",
+    "price": 5000,
+    "discount": 30,
     "is_free_delivery": true,
-    "rating": 3.8,
-    "no_of_feedbacks": 4820,
-    "size": "Large",
-    "no_of_special_offers": 1,
-    "special_offer_price": 7200,
-    "category": "cloths",
-    "tryon_category": "Upper body",
-    "tryon_image":
-        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
+    "rating": 3.9,
+    "no_of_feedbacks": 450,
+    "no_of_special_offers": 5,
+    "special_offer_price": 4500,
+    "category": "electronics",
     "3d_model_url":
-        "https://cdn.tinyglb.com/models/5acf9c85f50b4b1e9f446a5509b613f4.glb",
+        "https://cdn.tinyglb.com/models/de2f14f9be264645bf8c3d12b2c1c458.glb",
     "seller_details": {
-      "name": "Tirth Enterprise",
-      "rating": 3.6,
-      "followers": 13,
-      "products": 53
+      "name": "SOUL-ELECTRONICS",
+      "rating": 4.2,
+      "followers": 15,
+      "products": 100
     },
     "product_highlights": {
-      "color": "Ivory White",
-      "material": "Cotton",
-      "net_quantity": "Pack of 11",
-      "type": "Jacket"
+      "color": "Black",
+      "material": "S-c36 fibre",
+      "net_quantity": "Pack of 1",
+      "type": "Scrub"
     },
     "additional_details": {
-      "product_height": 15,
-      "product_width": 10,
-      "product_length": 10,
-      "product_unit": "Inch",
-      "country_of_origin": "India",
-      "manufacturer_information": "Monti Carlo",
+      "product_height": 52,
+      "product_width": 30,
+      "product_weight": "2Kg",
+      "product_length": 60,
+      "product_unit": "inch",
+      "country_of_origin": "China",
+      "manufacturer_information": "SOUL-ELECTRONICS",
       "importer_information": "No info",
       "packer_information": "No info"
     },
     "images": [
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM.jpeg?alt=media&token=8b47ae1e-a8b6-4def-ba3d-358ad26e9e32",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM%20(1).jpeg?alt=media&token=028403a8-48c6-47c4-a1e6-2d4c428b2c1c",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72"
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM%20(1).jpeg?alt=media&token=5f172cbc-1a0d-446a-aeb5-ab53c82b91a8",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM%20(2).jpeg?alt=media&token=5e21722d-91f7-4fa3-bec2-02ab1a242652",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM.jpeg?alt=media&token=7e86b75e-dc83-446c-a3db-193607edde5c",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.17%20PM.jpeg?alt=media&token=9b6e968f-9af4-4b3f-864f-1fc8f86290b5"
     ]
   },
   {
@@ -317,50 +313,6 @@ List<Map<String, dynamic>> productData = [
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.11.10%20PM%20(1).jpeg?alt=media&token=169788ca-02f0-4219-bef0-8a86192ef3be",
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.11.09%20PM.jpeg?alt=media&token=d0171d03-f1f5-47fe-b99e-0f013f88fb40",
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.11.09%20PM%20(1).jpeg?alt=media&token=6c80fc51-8fff-43ff-a31f-cd12bab282b2"
-    ]
-  },
-  {
-    "id": 6,
-    "title_name": "VIBE-NITR speaker",
-    "descriptive_name": "MULTICOLOURED vibe nitr speaker",
-    "price": 5000,
-    "discount": 30,
-    "is_free_delivery": true,
-    "rating": 3.9,
-    "no_of_feedbacks": 450,
-    "no_of_special_offers": 5,
-    "special_offer_price": 4500,
-    "category": "electronics",
-    "3d_model_url":
-        "https://cdn.tinyglb.com/models/de2f14f9be264645bf8c3d12b2c1c458.glb",
-    "seller_details": {
-      "name": "SOUL-ELECTRONICS",
-      "rating": 4.2,
-      "followers": 15,
-      "products": 100
-    },
-    "product_highlights": {
-      "color": "Black",
-      "material": "S-c36 fibre",
-      "net_quantity": "Pack of 1",
-      "type": "Scrub"
-    },
-    "additional_details": {
-      "product_height": 52,
-      "product_width": 30,
-      "product_weight": "2Kg",
-      "product_length": 60,
-      "product_unit": "inch",
-      "country_of_origin": "China",
-      "manufacturer_information": "SOUL-ELECTRONICS",
-      "importer_information": "No info",
-      "packer_information": "No info"
-    },
-    "images": [
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM%20(1).jpeg?alt=media&token=5f172cbc-1a0d-446a-aeb5-ab53c82b91a8",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM%20(2).jpeg?alt=media&token=5e21722d-91f7-4fa3-bec2-02ab1a242652",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.16%20PM.jpeg?alt=media&token=7e86b75e-dc83-446c-a3db-193607edde5c",
-      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%206.21.17%20PM.jpeg?alt=media&token=9b6e968f-9af4-4b3f-864f-1fc8f86290b5"
     ]
   },
   {
@@ -713,6 +665,54 @@ List<Map<String, dynamic>> productData = [
     "images": [
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.11.34%20PM%20(1).jpeg?alt=media&token=82d7acc2-bb86-4b52-83b6-b2771b2bf4a4",
       "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.11.34%20PM.jpeg?alt=media&token=120a3815-b8ab-463e-a833-8b3acb9fd71e"
+    ]
+  },
+  {
+    "id": 1,
+    "title_name": "White Blazer",
+    "descriptive_name":
+        "GARBY CLUB WHITE colorblocked regular fit Blazer for men",
+    "price": 7800,
+    "discount": 25,
+    "is_free_delivery": true,
+    "rating": 3.8,
+    "no_of_feedbacks": 4820,
+    "size": "Large",
+    "no_of_special_offers": 1,
+    "special_offer_price": 7200,
+    "category": "cloths",
+    "tryon_category": "Upper body",
+    "tryon_image":
+        "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
+    "3d_model_url":
+        "https://cdn.tinyglb.com/models/5acf9c85f50b4b1e9f446a5509b613f4.glb",
+    "seller_details": {
+      "name": "Tirth Enterprise",
+      "rating": 3.6,
+      "followers": 13,
+      "products": 53
+    },
+    "product_highlights": {
+      "color": "Ivory White",
+      "material": "Cotton",
+      "net_quantity": "Pack of 11",
+      "type": "Jacket"
+    },
+    "additional_details": {
+      "product_height": 15,
+      "product_width": 10,
+      "product_length": 10,
+      "product_unit": "Inch",
+      "country_of_origin": "India",
+      "manufacturer_information": "Monti Carlo",
+      "importer_information": "No info",
+      "packer_information": "No info"
+    },
+    "images": [
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM%20(1).jpeg?alt=media&token=6177dbea-5618-4326-823d-04a8d030c88e",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM.jpeg?alt=media&token=8b47ae1e-a8b6-4def-ba3d-358ad26e9e32",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.33%20PM%20(1).jpeg?alt=media&token=028403a8-48c6-47c4-a1e6-2d4c428b2c1c",
+      "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2FWhatsApp%20Image%202024-09-12%20at%2010.59.32%20PM.jpeg?alt=media&token=5c4a13c3-7a10-4396-8d70-67071a848c72"
     ]
   },
   {

@@ -57,11 +57,8 @@ class _SocialAreaState extends State<SocialArea> {
                 Navigator.of(context).push(MaterialPageRoute(
                     builder: (context) => const GamesScreen()));
               },
-              icon: const Icon(
-                Icons.videogame_asset_outlined,
-                color: Colors.green,
-                size: 30,
-              )),
+              icon: Image.asset(
+                  height: 30, "assets/images/game-controller_solid.png")),
           IconButton(
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(
@@ -69,10 +66,13 @@ class _SocialAreaState extends State<SocialArea> {
                           groupId: widget.groupId,
                         )));
               },
-              icon: const Icon(
-                Icons.add_shopping_cart_sharp,
-                color: kMeeshoPurple,
-                size: 30.0,
+              icon: Container(
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(12),
+                    color: Colors.purple.shade100),
+                child: Image.asset(
+                    fit: BoxFit.fill,
+                    "assets/images/A_shopping_cart_icon_with_3_people_inside_it._Everything_on_a_purple_theme-removebg-preview.png"),
               )),
           const SizedBox(
             width: 20.0,

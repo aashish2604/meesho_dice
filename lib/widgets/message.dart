@@ -289,12 +289,12 @@ class ProductMessageBoxMe extends StatelessWidget {
                             Icon(
                               Icons.add_shopping_cart,
                               color: Colors.white,
-                              size: 20,
+                              size: 18,
                             ),
                             Text(
-                              "Add to cart",
+                              "Add to group cart",
                               style:
-                                  TextStyle(color: Colors.white, fontSize: 12),
+                                  TextStyle(color: Colors.white, fontSize: 9),
                             )
                           ],
                         )),
@@ -539,12 +539,12 @@ class ProductMessageBoxNotMe extends StatelessWidget {
                             Icon(
                               Icons.add_shopping_cart,
                               color: kMeeshoPurple,
-                              size: 20,
+                              size: 18,
                             ),
                             Text(
-                              "Add to cart",
+                              "Add to group cart",
                               style:
-                                  TextStyle(color: kMeeshoPurple, fontSize: 12),
+                                  TextStyle(color: kMeeshoPurple, fontSize: 9),
                             )
                           ],
                         )),
