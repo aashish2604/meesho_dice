@@ -15,6 +15,7 @@ const Color kGreyColor = Colors.grey;
 const Color kCoffeeColor = Color(0xFF6F4E37);
 const Color kChoclateColor = Color(0xFF7B3F00);
 const Color kMeeshoPurple = Color.fromARGB(255, 88, 10, 70);
+const Color kMeeshoMustard = Color(0xFFFE9D00);
 
 const TextStyle bodyTextStyle =
     TextStyle(fontSize: 10.0, fontWeight: FontWeight.w500);

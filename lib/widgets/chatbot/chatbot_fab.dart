@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/chatbot/chatbot_chat_screen.dart';
 
 class ChatBotFab extends StatefulWidget {
@@ -88,7 +89,7 @@ class _ChatBotFabState extends State<ChatBotFab>
                   ? FadeTransition(
                       opacity: _fadeInAnimation,
                       child: Card(
-                        color: Colors.purple,
+                        color: Color(0xFFF6CEFC),
                         shape: const RoundedRectangleBorder(
                             borderRadius: BorderRadius.only(
                                 topLeft: Radius.circular(16),
@@ -103,7 +104,7 @@ class _ChatBotFabState extends State<ChatBotFab>
                             child: Text(
                               widget.initMessage,
                               style:
-                                  TextStyle(fontSize: 12, color: Colors.white),
+                                  TextStyle(fontSize: 12, color: Colors.black),
                             ),
                           ),
                         ),
@@ -117,7 +118,9 @@ class _ChatBotFabState extends State<ChatBotFab>
 
             const SizedBox(width: 3), // Add some spacing between buttons
             FloatingActionButton(
-              shape: CircleBorder(),
+              shape: const CircleBorder(
+                  side: BorderSide(color: kMeeshoMustard, width: 1.6)),
+              backgroundColor: kMeeshoPurple,
               heroTag: 'chatBotFab',
               onPressed: () {
                 Navigator.of(context).push(MaterialPageRoute(

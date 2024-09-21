@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/screens/category_page.dart';
 
@@ -28,6 +29,7 @@ class CategoryBox extends StatelessWidget {
           children: [
             CircleAvatar(
               radius: 28.0,
+              backgroundImage: CachedNetworkImageProvider(image),
             ),
             const SizedBox(
               height: 8.0,

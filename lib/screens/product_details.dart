@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
@@ -283,21 +284,8 @@ class VirtualStoreContainer extends StatelessWidget {
             Wrap(
               children: [
                 VirtualStoreElement(
-                    borerColor: Colors.green,
-                    backgroundColor: Colors.lightGreen.shade100,
-                    action: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Model3dViewer(
-                              modelUrl: details["3d_model_url"],
-                              modelTitle: details["descriptive_name"])));
-                    },
-                    label: "3D View"),
-                const SizedBox(
-                  width: 10.0,
-                ),
-                VirtualStoreElement(
-                    borerColor: Colors.blue.shade900,
-                    backgroundColor: Colors.lightBlue.shade100,
+                    borerColor: kMeeshoPurple,
+                    backgroundColor: Colors.purple.shade100,
                     action: () {
                       Navigator.of(context).push(MaterialPageRoute(
                           builder: (context) => AugmentedRealityView(
@@ -305,6 +293,19 @@ class VirtualStoreContainer extends StatelessWidget {
                               )));
                     },
                     label: "AR View"),
+                const SizedBox(
+                  width: 10.0,
+                ),
+                VirtualStoreElement(
+                    borerColor: Colors.black,
+                    backgroundColor: Colors.white,
+                    action: () {
+                      Navigator.of(context).push(MaterialPageRoute(
+                          builder: (context) => Model3dViewer(
+                              modelUrl: details["3d_model_url"],
+                              modelTitle: details["descriptive_name"])));
+                    },
+                    label: "3D View"),
                 details["tryon_image"] != null
                     ? const SizedBox(
                         width: 10.0,
@@ -312,8 +313,8 @@ class VirtualStoreContainer extends StatelessWidget {
                     : const SizedBox.shrink(),
                 details["tryon_image"] != null
                     ? VirtualStoreElement(
-                        borerColor: Colors.amber.shade800,
-                        backgroundColor: Colors.yellow.shade100,
+                        borerColor: Color(0xff00317D),
+                        backgroundColor: Colors.blue.shade100,
                         action: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => VirtualTryOnInput(
@@ -343,6 +344,15 @@ class VirtualStoreElement extends StatelessWidget {
       required this.action,
       required this.label});
 
+  String getImagePath() {
+    if (label == "3D View")
+      return "assets/images/model_3d.png";
+    else if (label == "AR View")
+      return "assets/images/ar.png";
+    else
+      return "assets/images/virtual_tryon.png";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -351,7 +361,8 @@ class VirtualStoreElement extends StatelessWidget {
         CircularIconButton(
             borderColor: borerColor,
             backgroundColor: backgroundColor,
-            action: action),
+            action: action,
+            imagePath: getImagePath()),
         const SizedBox(
           height: 6.0,
         ),
@@ -550,7 +561,13 @@ class SellerDetailsBox extends StatelessWidget {
           ),
           Row(
             children: [
-              CircleAvatar(),
+              CircleAvatar(
+                backgroundColor: Colors.lightBlue.shade200,
+                backgroundImage: CachedNetworkImageProvider(
+                    maxHeight: 80,
+                    maxWidth: 80,
+                    "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fstore.png?alt=media&token=c1187e3c-e656-4014-933d-fcd81ec72c27"),
+              ),
               const SizedBox(
                 width: 12.0,
               ),

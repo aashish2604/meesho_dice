@@ -10,6 +10,7 @@ import 'package:meesho_dice/widgets/category_box.dart';
 import 'package:meesho_dice/widgets/loading.dart';
 import 'package:meesho_dice/widgets/product_box.dart';
 import 'package:meesho_dice/widgets/timer.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeTab extends StatelessWidget {
   const HomeTab({super.key});
@@ -77,32 +78,38 @@ class CategorySection extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         children: const [
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fmodern-stationary-collection-arrangement.jpg?alt=media&token=223d4f98-2c0c-469d-8435-a93acb59dcbc",
             title: "Electronics",
             category: "electronics",
           ),
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fcontemporary-living-room-interior-design-with-white-sofa.jpg?alt=media&token=1881a683-6cc7-4dda-ab36-0ecaf7fa877a",
             title: "Home",
             category: "home",
           ),
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Ffast-fashion-concept-with-full-clothing-store.jpg?alt=media&token=754de242-9659-4236-b655-316e5066c072",
             title: "Clothing",
             category: "cloths",
           ),
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fkids-home-playing-with-toys.jpg?alt=media&token=5684e24d-ace4-433f-b549-07e8b2cc7114",
             title: "Kids",
             category: "kids",
           ),
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Ffootball-background-grass-with-shoes.jpg?alt=media&token=28711fd4-0420-42f2-b1be-8ad80d3e13d3",
             title: "Shoes",
             category: "shoes",
           ),
           CategoryBox(
-            image: "image",
+            image:
+                "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2F37207.jpg?alt=media&token=a383080c-4f2b-45d7-b42b-c891e3eed626",
             title: "Sports",
             category: "sports",
           )
@@ -118,33 +125,37 @@ class OfferCarousal extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final List<String> imgList = [
-      'https://images.unsplash.com/photo-1520342868574-5fa3804e551c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=6ff92caffcdd63681a35134a6770ed3b&auto=format&fit=crop&w=1951&q=80',
-      'https://images.unsplash.com/photo-1522205408450-add114ad53fe?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=368f45b0888aeb0b7b08e3a1084d3ede&auto=format&fit=crop&w=1950&q=80',
-      'https://images.unsplash.com/photo-1519125323398-675f0ddb6308?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=94a1e718d89ca60a6337a6008341ca50&auto=format&fit=crop&w=1950&q=80',
-      'https://images.unsplash.com/photo-1523205771623-e0faa4d2813d?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=89719a0d55dd05e2deae4120227e6efc&auto=format&fit=crop&w=1953&q=80',
-      'https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=8c6e5e3aba713b17aa1fe71ab4f0ae5b&auto=format&fit=crop&w=1352&q=80',
-      'https://images.unsplash.com/photo-1519985176271-adb1088fa94c?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=a0c8d632e977f94e5d312d9893258f59&auto=format&fit=crop&w=1355&q=80'
+      'https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2FScreenshot%20(288).png?alt=media&token=0b547b7b-b260-41b0-8967-abe8e71ba4b2',
+      'https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2FScreenshot%20(285).png?alt=media&token=6e8ce13c-b5c3-4fb3-8c18-92bc4f81ac78'
     ];
 
     return Container(
         color: Colors.white,
-        height: 136,
+        height: 160,
         child: CarouselSlider(
           options: CarouselOptions(
-            height: 120,
+            height: 140,
             viewportFraction: 1.0,
             enlargeCenterPage: false,
             // autoPlay: false,
           ),
           items: imgList
-              .map((item) => Container(
-                    margin: const EdgeInsets.symmetric(horizontal: 15.0),
-                    width: MediaQuery.of(context).size.width,
-                    decoration: BoxDecoration(
-                        image: DecorationImage(
-                            fit: BoxFit.fill,
-                            image: CachedNetworkImageProvider(item)),
-                        borderRadius: BorderRadius.circular(16.0)),
+              .map((item) => GestureDetector(
+                    onTap: () {
+                      launchUrl(
+                          Uri.parse(
+                              "https://webviews.meesho.com/pages/static/mega-blockbuster-sale0-1"),
+                          mode: LaunchMode.inAppWebView);
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.symmetric(horizontal: 15.0),
+                      width: MediaQuery.of(context).size.width,
+                      decoration: BoxDecoration(
+                          image: DecorationImage(
+                              fit: BoxFit.fill,
+                              image: CachedNetworkImageProvider(item)),
+                          borderRadius: BorderRadius.circular(16.0)),
+                    ),
                   ))
               .toList(),
         ));

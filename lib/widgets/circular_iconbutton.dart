@@ -4,11 +4,13 @@ class CircularIconButton extends StatelessWidget {
   final Color borderColor;
   final Color backgroundColor;
   final GestureTapCallback action;
+  final String imagePath;
   const CircularIconButton(
       {super.key,
       required this.borderColor,
       required this.backgroundColor,
-      required this.action});
+      required this.action,
+      required this.imagePath});
 
   @override
   Widget build(BuildContext context) {
@@ -20,6 +22,7 @@ class CircularIconButton extends StatelessWidget {
         child: CircleAvatar(
           radius: 25,
           backgroundColor: backgroundColor,
+          backgroundImage: AssetImage(imagePath),
         ),
       ),
     );
