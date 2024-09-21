@@ -78,10 +78,7 @@ class HomeAppbarTrailing {
       Stack(
         children: [
           IconButton(
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                  builder: (context) => const SocialGroupList()));
-            },
+            onPressed: () {},
             icon: Image.asset(height: 26, "assets/images/coin.png"),
           ),
           Positioned(

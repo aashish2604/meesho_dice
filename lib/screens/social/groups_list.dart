@@ -58,8 +58,8 @@ class SocialGroupList extends StatelessWidget {
                           children: [
                             CircleAvatar(
                               radius: 20.0,
-                              child:
-                                  CachedNetworkImage(imageUrl: data["image"]),
+                              backgroundImage:
+                                  CachedNetworkImageProvider(data["image"]),
                             ),
                             const SizedBox(
                               width: 8.0,

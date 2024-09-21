@@ -93,7 +93,9 @@ class _GamesScreenState extends State<GamesScreen> {
                             mode: LaunchMode.inAppWebView);
                       },
                       title: const GameListTileContent(
-                          name: "Flappy Bird", imageUrl: "imageUrl"),
+                          name: "Flappy Bird",
+                          imageUrl:
+                              "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fic_launcher%20(2).png?alt=media&token=4ba3bfde-cd50-4f0f-80bd-c550af7603ee"),
                     ),
                   ),
                   Card(
@@ -103,7 +105,9 @@ class _GamesScreenState extends State<GamesScreen> {
                             mode: LaunchMode.inAppWebView);
                       },
                       title: const GameListTileContent(
-                          name: "Wordle", imageUrl: "imageUrl"),
+                          name: "Wordle",
+                          imageUrl:
+                              "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Foutput-onlinepngtools-fotor-20240921132321.png?alt=media&token=8486f723-efe9-4ae6-801f-2b5594994b65"),
                     ),
                   ),
                   Card(
@@ -113,7 +117,9 @@ class _GamesScreenState extends State<GamesScreen> {
                             mode: LaunchMode.inAppWebView);
                       },
                       title: const GameListTileContent(
-                          name: "Pacman", imageUrl: "imageUrl"),
+                          name: "Pacman",
+                          imageUrl:
+                              "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fic_launcher%20(4).png?alt=media&token=39b2cf70-9270-4e4e-8c02-a62dd3fa1e09"),
                     ),
                   ),
                   Card(
@@ -125,7 +131,9 @@ class _GamesScreenState extends State<GamesScreen> {
                             mode: LaunchMode.inAppWebView);
                       },
                       title: const GameListTileContent(
-                          name: "Tetris", imageUrl: "imageUrl"),
+                          name: "Tetris",
+                          imageUrl:
+                              "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fic_launcher%20(6).png?alt=media&token=f5f8f194-07e4-4cab-9440-4bbb7685a511"),
                     ),
                   ),
                 ],
@@ -231,6 +239,7 @@ class GameListTileContent extends StatelessWidget {
         children: [
           CircleAvatar(
             radius: 40,
+            backgroundImage: CachedNetworkImageProvider(imageUrl),
           ),
           const SizedBox(
             height: 12.0,

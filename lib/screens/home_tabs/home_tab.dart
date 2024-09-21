@@ -126,7 +126,7 @@ class OfferCarousal extends StatelessWidget {
   Widget build(BuildContext context) {
     final List<String> imgList = [
       'https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2FScreenshot%20(288).png?alt=media&token=0b547b7b-b260-41b0-8967-abe8e71ba4b2',
-      'https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2FScreenshot%20(285).png?alt=media&token=6e8ce13c-b5c3-4fb3-8c18-92bc4f81ac78'
+      'https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2FScreenshot%20(285).png?alt=media&token=6e8ce13c-b5c3-4fb3-8c18-92bc4f81ac78',
     ];
 
     return Container(
