@@ -46,6 +46,31 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final homeIcon = Image.asset(
+      "assets/images/home.png",
+      height: 26,
+    );
+    final homeActiveIcon = Image.asset(
+      "assets/images/home_active.png",
+      height: 26,
+    );
+    final ordersIcon = Image.asset(
+      "assets/images/orders.png",
+      height: 26,
+    );
+    final ordersActiveIcon = Image.asset(
+      "assets/images/orders_active.png",
+      height: 26,
+    );
+    final accountIcon = Image.asset(
+      "assets/images/account.png",
+      height: 26,
+    );
+    final accountActiveIcon = Image.asset(
+      "assets/images/account_active.png",
+      height: 26,
+    );
+
     return Scaffold(
         appBar: PreferredSize(
           preferredSize:
@@ -70,24 +95,25 @@ class _HomePageState extends State<HomePage> {
           child: _widgetOptions.elementAt(_selectedIndex),
         ),
         bottomNavigationBar: BottomNavigationBar(
+          selectedLabelStyle: TextStyle(fontSize: 12),
+          unselectedLabelStyle: TextStyle(fontSize: 12),
           backgroundColor: Colors.white,
           items: <BottomNavigationBarItem>[
             BottomNavigationBarItem(
-              icon:
-                  _selectedIndex == 0 ? Icon(Icons.home) : Icon(Icons.ac_unit),
+              icon: _selectedIndex == 0 ? homeActiveIcon : homeIcon,
               label: 'Home',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.inventory_2_outlined),
+              icon: _selectedIndex == 1 ? ordersActiveIcon : ordersIcon,
               label: 'My Orders',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.emoji_emotions),
+              icon: _selectedIndex == 2 ? accountActiveIcon : accountIcon,
               label: 'Account',
             ),
           ],
           currentIndex: _selectedIndex,
-          selectedItemColor: Colors.purple,
+          selectedItemColor: Colors.black,
           onTap: _onItemTapped,
         ),
         floatingActionButton: ChatBotFab(

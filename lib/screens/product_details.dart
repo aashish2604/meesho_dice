@@ -564,8 +564,6 @@ class SellerDetailsBox extends StatelessWidget {
               CircleAvatar(
                 backgroundColor: Colors.lightBlue.shade200,
                 backgroundImage: CachedNetworkImageProvider(
-                    maxHeight: 80,
-                    maxWidth: 80,
                     "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/app_assets%2Fstore.png?alt=media&token=c1187e3c-e656-4014-933d-fcd81ec72c27"),
               ),
               const SizedBox(
