@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/services/auth_service.dart';
+import 'package:meesho_dice/services/theme.dart';
 
 class Login extends StatefulWidget {
   final Function toggleView;
@@ -28,7 +29,10 @@ class _LoginState extends State<Login> {
     double height = MediaQuery.of(context).size.height;
 
     return Container(
-      // decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/auth.jpg'),fit: BoxFit.fill)),
+      decoration: BoxDecoration(
+          image: DecorationImage(
+              image: AssetImage('assets/images/auth_background.jpg'),
+              fit: BoxFit.fill)),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
@@ -45,25 +49,25 @@ class _LoginState extends State<Login> {
                       child: Column(
                         children: [
                           Text(
-                            'LOGIN',
+                            'Login',
                             style: TextStyle(
                                 fontWeight: FontWeight.bold,
                                 fontFamily: "DancingScript",
                                 fontSize: 30,
-                                color: Color(0xFF4B2711)),
+                                color: kMeeshoPurple),
                           ),
                           SizedBox(height: height * 0.01),
                           TextFormField(
                             validator: (val) =>
                                 val!.isEmpty ? 'Enter email' : null,
-                            cursorColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 19),
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
                             decoration: InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintStyle: TextStyle(
-                                    fontSize: 19, color: Colors.white70),
+                                    fontSize: 19, color: Colors.black87),
                                 hintText: 'Email'),
                             onChanged: (val) {
                               setState(() {
@@ -73,17 +77,17 @@ class _LoginState extends State<Login> {
                           ),
                           SizedBox(height: 20),
                           TextFormField(
-                            cursorColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 19),
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
                             obscureText: _isHidden,
                             validator: (val) =>
                                 val!.isEmpty ? 'Enter Password' : null,
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.white, width: 2)),
-                              hintStyle: TextStyle(
-                                  fontSize: 19, color: Colors.white70),
+                                      color: Colors.black, width: 2)),
+                              hintStyle:
+                                  TextStyle(fontSize: 19, color: Colors.black),
                               hintText: 'Password',
                               suffix: InkWell(
                                 onTap: _togglePasswordView,
@@ -91,7 +95,7 @@ class _LoginState extends State<Login> {
                                   _isHidden
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.grey,
+                                  color: Colors.black87,
                                 ),
                               ),
                             ),
@@ -192,7 +196,7 @@ class _LoginState extends State<Login> {
                           SizedBox(height: height * 0.08),
                           Text(
                             'New User? Register',
-                            style: TextStyle(color: Colors.white70),
+                            style: TextStyle(color: Colors.black54),
                           ),
                           SizedBox(height: 5),
                           ElevatedButton(

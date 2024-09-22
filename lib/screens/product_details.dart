@@ -634,7 +634,7 @@ class DetailsBox extends StatelessWidget {
       if (value is int) {
         value = value.toString();
       }
-      response.add(getKeyValueWidget(key, value, context));
+      response.add(getKeyValueWidget(key, value.toString(), context));
     });
     return response;
   }

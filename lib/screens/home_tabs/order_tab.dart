@@ -31,6 +31,7 @@ class OrderTab extends StatelessWidget {
             if (snapshot.hasData) {
               final docs = snapshot.data!.docs;
               return Container(
+                  height: MediaQuery.of(context).size.height,
                   decoration: BoxDecoration(
                       border: Border.symmetric(
                           horizontal:

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/services/auth_service.dart';
+import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/loading.dart';
 
 class Register extends StatefulWidget {
@@ -14,6 +16,7 @@ class _RegisterState extends State<Register> {
   String? _email;
   String? _password;
   String? _confirmPassword;
+  String? _username;
   bool loading = false;
   bool _isHidden = true;
   String errorMessage = '';
@@ -47,7 +50,10 @@ class _RegisterState extends State<Register> {
     return loading
         ? LoadingWidget()
         : Container(
-            // decoration: BoxDecoration(image: DecorationImage(image: AssetImage('assets/images/auth.jpg'),fit: BoxFit.fill)),
+            decoration: BoxDecoration(
+                image: DecorationImage(
+                    image: AssetImage('assets/images/auth_background.jpg'),
+                    fit: BoxFit.fill)),
             child: Scaffold(
               backgroundColor: Colors.transparent,
               body: SingleChildScrollView(
@@ -58,12 +64,12 @@ class _RegisterState extends State<Register> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          SizedBox(height: height * 0.32),
+                          SizedBox(height: height * 0.28),
                           Text(
-                            'REGISTER',
+                            'Register',
                             style: TextStyle(
                                 fontSize: 30,
-                                color: Color(0xFF4B2711),
+                                color: kMeeshoPurple,
                                 fontFamily: "DancingScript",
                                 fontWeight: FontWeight.bold),
                           ),
@@ -72,14 +78,14 @@ class _RegisterState extends State<Register> {
                             validator: (val) => val!.isEmpty
                                 ? 'This is a required field'
                                 : null,
-                            cursorColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 19),
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
                             decoration: InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintStyle: TextStyle(
-                                    fontSize: 19, color: Colors.white60),
+                                    fontSize: 19, color: Colors.black87),
                                 hintText: 'Email'),
                             onChanged: (val) {
                               setState(() {
@@ -92,15 +98,15 @@ class _RegisterState extends State<Register> {
                             validator: (val) => val!.isEmpty
                                 ? 'This is a required field'
                                 : null,
-                            cursorColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 19),
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
                             obscureText: _isHidden,
                             decoration: InputDecoration(
                               focusedBorder: UnderlineInputBorder(
                                   borderSide: BorderSide(
-                                      color: Colors.white, width: 2)),
+                                      color: Colors.black, width: 2)),
                               hintStyle: TextStyle(
-                                  fontSize: 19, color: Colors.white70),
+                                  fontSize: 19, color: Colors.black87),
                               hintText: 'Password',
                               suffix: InkWell(
                                 onTap: _togglePasswordView,
@@ -108,7 +114,7 @@ class _RegisterState extends State<Register> {
                                   _isHidden
                                       ? Icons.visibility
                                       : Icons.visibility_off,
-                                  color: Colors.grey,
+                                  color: Colors.black87,
                                 ),
                               ),
                             ),
@@ -123,18 +129,38 @@ class _RegisterState extends State<Register> {
                             validator: (val) => val!.isEmpty
                                 ? 'This is a required field'
                                 : null,
-                            cursorColor: Colors.white,
-                            style: TextStyle(color: Colors.white, fontSize: 19),
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
                             decoration: InputDecoration(
                                 focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
-                                        color: Colors.white, width: 2)),
+                                        color: Colors.black, width: 2)),
                                 hintStyle: TextStyle(
-                                    fontSize: 19, color: Colors.white60),
+                                    fontSize: 19, color: Colors.black87),
                                 hintText: 'Confirm Password'),
                             onChanged: (val) {
                               setState(() {
                                 _confirmPassword = val;
+                              });
+                            },
+                          ),
+                          SizedBox(height: height * 0.02),
+                          TextFormField(
+                            validator: (val) => val!.isEmpty
+                                ? 'This is a required field'
+                                : null,
+                            cursorColor: Colors.black,
+                            style: TextStyle(color: Colors.black, fontSize: 19),
+                            decoration: InputDecoration(
+                                focusedBorder: UnderlineInputBorder(
+                                    borderSide: BorderSide(
+                                        color: Colors.black, width: 2)),
+                                hintStyle: TextStyle(
+                                    fontSize: 19, color: Colors.black87),
+                                hintText: 'Name'),
+                            onChanged: (val) {
+                              setState(() {
+                                _username = val;
                               });
                             },
                           ),
@@ -147,6 +173,9 @@ class _RegisterState extends State<Register> {
                               onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   if (_password == _confirmPassword) {
+                                    await AuthService()
+                                        .registerWithEmailAndPassword(
+                                            _email!, _password!, _username!);
                                   } else {
                                     setState(() {
                                       errorMessage =
@@ -229,7 +258,7 @@ class _RegisterState extends State<Register> {
                           // ),
                           SizedBox(height: height * 0.07),
                           Text('Already registered? Login',
-                              style: TextStyle(color: Colors.white70)),
+                              style: TextStyle(color: Colors.black87)),
                           SizedBox(height: 5),
                           ElevatedButton(
                               onPressed: () {

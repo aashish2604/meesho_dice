@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/services/auth_service.dart';
 
 class AccountTab extends StatelessWidget {
   const AccountTab({super.key});
@@ -8,7 +10,9 @@ class AccountTab extends StatelessWidget {
     return Scaffold(
       body: Center(
         child: TextButton(
-          onPressed: () {},
+          onPressed: () async {
+            await AuthService().signOut();
+          },
           child: Text(
             "logout",
             style: TextStyle(color: Colors.white),

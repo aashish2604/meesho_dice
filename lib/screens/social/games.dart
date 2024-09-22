@@ -50,9 +50,9 @@ class _GamesScreenState extends State<GamesScreen> {
             Center(
               child: CircleAvatar(
                 radius: 80,
-                child: userDetails == null
+                backgroundImage: userDetails == null
                     ? null
-                    : CachedNetworkImage(imageUrl: userDetails!["image"]),
+                    : CachedNetworkImageProvider(userDetails!["image"]),
               ),
             ),
             const SizedBox(

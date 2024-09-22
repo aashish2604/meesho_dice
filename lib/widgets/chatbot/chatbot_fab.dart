@@ -5,7 +5,7 @@ import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/chatbot/chatbot_chat_screen.dart';
 
 class ChatBotFab extends StatefulWidget {
-  final String initMessage;
+  final String? initMessage;
   final int startingDelayInSeconds;
   final int containerLifeInSeconds;
   final double messageBoxWidth;
@@ -99,17 +99,19 @@ class _ChatBotFabState extends State<ChatBotFab>
                                 bottomLeft: Radius.circular(16))),
                         elevation: 5.0,
                         key: ValueKey(1),
-                        child: Container(
-                          padding: EdgeInsets.all(12.0),
-                          width: widget.messageBoxWidth,
-                          child: Center(
-                            child: Text(
-                              widget.initMessage,
-                              style:
-                                  TextStyle(fontSize: 12, color: Colors.black),
-                            ),
-                          ),
-                        ),
+                        child: widget.initMessage == null
+                            ? SizedBox.shrink()
+                            : Container(
+                                padding: EdgeInsets.all(12.0),
+                                width: widget.messageBoxWidth,
+                                child: Center(
+                                  child: Text(
+                                    widget.initMessage!,
+                                    style: TextStyle(
+                                        fontSize: 12, color: Colors.black),
+                                  ),
+                                ),
+                              ),
                       ),
                     )
                   : const SizedBox.shrink(

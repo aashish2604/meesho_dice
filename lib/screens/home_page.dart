@@ -79,6 +79,7 @@ class _HomePageState extends State<HomePage> {
             // backgroundColor: Colors.white,
             scrolledUnderElevation: 0,
             title: HomeAppbarLeading(
+                userImage: userDetails == null ? "" : userDetails!["image"],
                 userName: userDetails == null ? "" : userDetails!["username"]),
             actions: HomeAppbarTrailing().getAppBarActions(context),
             bottom: _selectedIndex == 0
@@ -117,7 +118,7 @@ class _HomePageState extends State<HomePage> {
           onTap: _onItemTapped,
         ),
         floatingActionButton: ChatBotFab(
-          initMessage: "Welcome to home screen",
+          initMessage: null,
           containerLifeInSeconds: 5,
         ));
   }

@@ -10,7 +10,9 @@ import 'package:meesho_dice/services/theme.dart';
 
 class HomeAppbarLeading extends StatelessWidget {
   final String userName;
-  const HomeAppbarLeading({super.key, required this.userName});
+  final String userImage;
+  const HomeAppbarLeading(
+      {super.key, required this.userName, required this.userImage});
 
   @override
   Widget build(BuildContext context) {
@@ -18,9 +20,8 @@ class HomeAppbarLeading extends StatelessWidget {
       children: [
         CircleAvatar(
           radius: 26,
-          child: CachedNetworkImage(
-              imageUrl:
-                  "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85"),
+          backgroundImage:
+              userImage == "" ? null : CachedNetworkImageProvider(userImage),
         ),
         const SizedBox(
           width: 8.0,
