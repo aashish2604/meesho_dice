@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:meesho_dice/repository/firebase.dart';
@@ -456,65 +457,129 @@ class _SocialGroupBottomsheetState extends State<SocialGroupBottomsheet> {
       padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 20.0),
       child: isLoading
           ? LoadingWidget()
-          : ListView(
-              shrinkWrap: true,
-              children: [
-                Text(
-                  "Groups",
-                  style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.bold),
-                ),
-                SizedBox(
-                  height: 16.0,
-                ),
-                Text(
-                  "Tap the group in which you wish to share this product",
-                  style: TextStyle(fontSize: 12.0),
-                ),
-                SizedBox(
-                  height: 20.0,
-                ),
-                Card(
-                  child: ListTile(
-                    onTap: () async {
-                      setState(() {
-                        isLoading = true;
+          : StreamBuilder(
+              stream: FirebaseFirestore.instance
+                  .collection("users")
+                  .doc(FirebaseServices.getUserId())
+                  .collection("groups")
+                  .snapshots(),
+              builder: (context, snapshot) {
+                if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                }
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(
+                    child: LabeledLoadingWidget(
+                        label: Text("Loading"), loaderColor: kMeeshoPurple),
+                  );
+                }
+                if (snapshot.hasData) {
+                  final documents = snapshot.data!.docs;
+                  return ListView.builder(
+                      itemCount: documents.length,
+                      itemBuilder: (context, index) {
+                        var data =
+                            documents[index].data() as Map<String, dynamic>;
+                        var groupId = documents[index].id;
+                        return Card(
+                            child: ListTile(
+                          onTap: () async {
+                            setState(() {
+                              isLoading = true;
+                            });
+                            await FirebaseServices.uploadProductToChat(
+                                widget.details["id"],
+                                FirebaseServices.getUserId(),
+                                "product",
+                                groupId);
+                            setState(() {
+                              isLoading = false;
+                            });
+                            if (!mounted) return;
+                            if (context.mounted) {
+                              Navigator.of(context).pop();
+                            }
+                            Fluttertoast.showToast(
+                                msg: "Product added to chat");
+                          },
+                          title: Row(
+                            children: [
+                              CircleAvatar(
+                                radius: 20.0,
+                                backgroundImage:
+                                    CachedNetworkImageProvider(data["image"]),
+                              ),
+                              const SizedBox(
+                                width: 8.0,
+                              ),
+                              Text(data["name"]),
+                            ],
+                          ),
+                        ));
                       });
-                      await FirebaseServices.uploadProductToChat(
-                          widget.details["id"],
-                          "fbSH5sqoREa1ZdpK0ShRUUct0mh2",
-                          "product",
-                          "yT2Q2ospLIF09ggC0O74");
-                      setState(() {
-                        isLoading = false;
-                      });
-                      if (!mounted) return;
-                      Navigator.of(context).pop();
-                      Fluttertoast.showToast(msg: "Product added to chat");
-                    },
-                    title: Text("code_squad"),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                    },
-                    title: Text("Chillers"),
-                  ),
-                ),
-                Card(
-                  child: ListTile(
-                    onTap: () async {
-                      Navigator.of(context).pop();
-                    },
-                    title: Text("Sneakerheads"),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                )
-              ],
-            ),
+                }
+                return const Center(child: Text('No documents found'));
+                // return ListView(
+                //   shrinkWrap: true,
+                //   children: [
+                //     Text(
+                //       "Groups",
+                //       style: TextStyle(
+                //           fontSize: 20.0, fontWeight: FontWeight.bold),
+                //     ),
+                //     SizedBox(
+                //       height: 16.0,
+                //     ),
+                //     Text(
+                //       "Tap the group in which you wish to share this product",
+                //       style: TextStyle(fontSize: 12.0),
+                //     ),
+                //     SizedBox(
+                //       height: 20.0,
+                //     ),
+                //     Card(
+                //       child: ListTile(
+                //         onTap: () async {
+                //           setState(() {
+                //             isLoading = true;
+                //           });
+                //           await FirebaseServices.uploadProductToChat(
+                //               widget.details["id"],
+                //               "fbSH5sqoREa1ZdpK0ShRUUct0mh2",
+                //               "product",
+                //               "yT2Q2ospLIF09ggC0O74");
+                //           setState(() {
+                //             isLoading = false;
+                //           });
+                //           if (!mounted) return;
+                //           Navigator.of(context).pop();
+                //           Fluttertoast.showToast(msg: "Product added to chat");
+                //         },
+                //         title: Text("code_squad"),
+                //       ),
+                //     ),
+                //     Card(
+                //       child: ListTile(
+                //         onTap: () async {
+                //           Navigator.of(context).pop();
+                //         },
+                //         title: Text("Chillers"),
+                //       ),
+                //     ),
+                //     Card(
+                //       child: ListTile(
+                //         onTap: () async {
+                //           Navigator.of(context).pop();
+                //         },
+                //         title: Text("Sneakerheads"),
+                //       ),
+                //     ),
+                //     const SizedBox(
+                //       height: 10.0,
+                //     )
+                //   ],
+                // );
+              }),
     );
   }
 }

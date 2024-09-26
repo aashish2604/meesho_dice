@@ -11,7 +11,7 @@ class FirebaseServices {
           .collection("chats");
       await messages.add({
         'sender_image_url':
-            "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85",
         'type': type,
         'sender_uid': senderUid,
         'message': message,
@@ -31,7 +31,7 @@ class FirebaseServices {
           .collection("chats");
       await messages.add({
         'sender_image_url':
-            "https://images.unsplash.com/photo-1557862921-37829c790f19?q=80&w=871&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+            "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85",
         'type': type,
         'sender_uid': senderId,
         'product_id': productId,
