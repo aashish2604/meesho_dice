@@ -25,7 +25,7 @@ class _SocialAreaState extends State<SocialArea> {
 
   void sendMessage() async {
     FocusScope.of(context).unfocus();
-    await FirebaseServices.uploadMessage(
+    await FirebaseServices().uploadMessage(
         FirebaseServices.getUserId(), _controller.text, widget.groupId, "text");
     _controller.clear();
   }
@@ -40,7 +40,8 @@ class _SocialAreaState extends State<SocialArea> {
           children: [
             CircleAvatar(
               radius: 20.0,
-              child: CachedNetworkImage(imageUrl: widget.groupSummary["image"]),
+              backgroundImage:
+                  CachedNetworkImageProvider(widget.groupSummary['image']),
             ),
             SizedBox(
               width: 12.0,

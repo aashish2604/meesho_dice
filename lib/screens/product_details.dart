@@ -487,7 +487,7 @@ class _SocialGroupBottomsheetState extends State<SocialGroupBottomsheet> {
                             setState(() {
                               isLoading = true;
                             });
-                            await FirebaseServices.uploadProductToChat(
+                            await FirebaseServices().uploadProductToChat(
                                 widget.details["id"],
                                 FirebaseServices.getUserId(),
                                 "product",

@@ -5,6 +5,7 @@ import 'package:meesho_dice/screens/home_screen.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/wrapper.dart';
 
+final navigatorKey = GlobalKey<NavigatorState>();
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -18,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      navigatorKey: navigatorKey,
       title: 'Flutter Demo',
       debugShowCheckedModeBanner: false,
       theme: AppTheme().lightTheme(),

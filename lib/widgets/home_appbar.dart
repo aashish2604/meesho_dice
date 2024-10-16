@@ -45,6 +45,33 @@ class HomeAppbarLeading extends StatelessWidget {
 }
 
 class HomeAppbarTrailing {
+  Widget getDialogTitle(int noOfCoins) {
+    if (noOfCoins == 0)
+      return const Text("Hmm...no Meesho Coins",
+          textAlign: TextAlign.center, style: TextStyle(fontSize: 20.0));
+    return RichText(
+        textAlign: TextAlign.center,
+        text: TextSpan(children: [
+          TextSpan(
+              text: "You have ",
+              style: TextStyle(fontSize: 20.0, color: Colors.black)),
+          TextSpan(
+              text: noOfCoins.toString(),
+              style: TextStyle(fontSize: 20.0, color: Colors.orange)),
+          TextSpan(
+              text: " Meesho Coins",
+              style: TextStyle(fontSize: 20.0, color: Colors.black))
+        ]));
+  }
+
+  Widget getDialogContent(int noOfCoins) {
+    if (noOfCoins == 0)
+      return const Text(
+          "No need to worry! Simply make purchases and engage in activities to rack up coins, unlocking exclusive rewards just for you! 🛒💸 The more you participate, the more you win! 🎁✨");
+    return const Text(
+        "Awesome so far! 🎉 Keep exploring the app and make more purchases to boost your coin count! 🛍️ The more you engage, the faster your rewards grow! 🚀🌟");
+  }
+
   List<Widget> getAppBarActions(BuildContext context) {
     return [
       IconButton(
@@ -76,36 +103,52 @@ class HomeAppbarTrailing {
           color: Colors.purple,
         ),
       ),
-      Stack(
-        children: [
-          IconButton(
-            onPressed: () {},
-            icon: Image.asset(height: 26, "assets/images/coin.png"),
-          ),
-          Positioned(
-              right: 3,
-              top: 0,
-              child: CircleAvatar(
-                radius: 10,
-                backgroundColor: Colors.yellow,
-                child: StreamBuilder(
-                    stream: FirebaseFirestore.instance
-                        .collection("users")
-                        .doc(FirebaseServices.getUserId())
-                        .snapshots(),
-                    builder: (context, snapshot) {
-                      return Text(
+      StreamBuilder(
+          stream: FirebaseFirestore.instance
+              .collection("users")
+              .doc(FirebaseServices.getUserId())
+              .snapshots(),
+          builder: (context, snapshot) {
+            return Stack(
+              children: [
+                IconButton(
+                  onPressed: () {
+                    showDialog(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return AlertDialog(
+                            backgroundColor: Colors.white,
+                            icon: Image.asset(
+                                height: 100, "assets/images/coin.png"),
+                            title: snapshot.hasData
+                                ? getDialogTitle((snapshot.data!.data()
+                                    as Map<String, dynamic>)["coins"])
+                                : const Text("Some error occured !!!"),
+                            content: getDialogContent((snapshot.data!.data()
+                                as Map<String, dynamic>)["coins"]),
+                          );
+                        });
+                  },
+                  icon: Image.asset(height: 26, "assets/images/coin.png"),
+                ),
+                Positioned(
+                    right: 3,
+                    top: 0,
+                    child: CircleAvatar(
+                      radius: 10,
+                      backgroundColor: Colors.yellow,
+                      child: Text(
                         snapshot.hasData
                             ? ((snapshot.data!.data()
                                     as Map<String, dynamic>)["coins"]
                                 .toString())
                             : "0",
                         style: TextStyle(fontSize: 10),
-                      );
-                    }),
-              ))
-        ],
-      ),
+                      ),
+                    ))
+              ],
+            );
+          }),
       const SizedBox(
         width: 12.0,
       )

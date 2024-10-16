@@ -232,6 +232,8 @@ class PersonalizedProducts extends StatelessWidget {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final documents = snapshot.data!.data();
+            if (documents!["personalized_offers"] == null)
+              return const SizedBox.shrink();
             final personalizedOffers =
                 documents!["personalized_offers"] as List;
             return personalizedOffers.isNotEmpty

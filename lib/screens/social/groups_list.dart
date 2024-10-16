@@ -3,7 +3,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:meesho_dice/repository/firebase.dart';
+import 'package:meesho_dice/screens/social/new_group_details_form.dart';
 import 'package:meesho_dice/screens/social/social_area.dart';
+import 'package:meesho_dice/services/notification_services.dart';
 import 'package:meesho_dice/services/theme.dart';
 import 'package:meesho_dice/widgets/loading.dart';
 
@@ -74,7 +76,18 @@ class SocialGroupList extends StatelessWidget {
             return const Center(child: Text('No documents found'));
           }),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () async {
+          // final deviceToken = await NotificationServices().getDeviceToken();
+          // NotificationServices().sendTokenNotification(deviceToken!,
+          //     "Testing functional Notification", "Some Message enfseoif", {
+          //   'group_id': 'groupId',
+          //   'group_name': 'groupName',
+          //   'group_icon': 'groupIcon',
+          //   'sender_name': 'senderName',
+          // });
+          Navigator.of(context).push(MaterialPageRoute(
+              builder: (context) => const NewGroupDetailsForm()));
+        },
         child: Icon(Icons.add),
       ),
     );

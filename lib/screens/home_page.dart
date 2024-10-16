@@ -3,6 +3,7 @@ import 'package:meesho_dice/repository/firebase.dart';
 import 'package:meesho_dice/screens/home_tabs/account.dart';
 import 'package:meesho_dice/screens/home_tabs/home_tab.dart';
 import 'package:meesho_dice/screens/home_tabs/order_tab.dart';
+import 'package:meesho_dice/services/notification_services.dart';
 import 'package:meesho_dice/widgets/chatbot/chatbot_fab.dart';
 import 'package:meesho_dice/widgets/home_appbar.dart';
 
@@ -26,6 +27,8 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     getUserData();
+    final notificationServices = NotificationServices();
+    notificationServices.initNotifications();
     super.initState();
   }
 

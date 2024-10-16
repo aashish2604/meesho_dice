@@ -1,17 +1,23 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:meesho_dice/services/notification_services.dart';
 
 class FirebaseServices {
-  static Future? uploadMessage(
+  Future? uploadMessage(
       String senderUid, String message, String groupId, String type) async {
     try {
       CollectionReference messages = FirebaseFirestore.instance
           .collection('groups')
           .doc(groupId)
           .collection("chats");
+      final userDetails = await getUserDetails();
+      print(userDetails);
       await messages.add({
-        'sender_image_url':
-            "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85",
+        'sender_image_url': userDetails!['image'],
         'type': type,
         'sender_uid': senderUid,
         'message': message,
@@ -22,16 +28,16 @@ class FirebaseServices {
     }
   }
 
-  static Future? uploadProductToChat(
+  Future? uploadProductToChat(
       int productId, String senderId, String type, String groupId) async {
     try {
       CollectionReference messages = FirebaseFirestore.instance
           .collection('groups')
           .doc(groupId)
           .collection("chats");
+      final userDetails = await getUserDetails();
       await messages.add({
-        'sender_image_url':
-            "https://firebasestorage.googleapis.com/v0/b/meesho-dice-9bfa9.appspot.com/o/product_images%2Fprofile-removebg-preview.png?alt=media&token=cddd0fc1-a0d5-4e41-840a-85d595f09c85",
+        'sender_image_url': userDetails!['image'],
         'type': type,
         'sender_uid': senderId,
         'product_id': productId,
@@ -148,5 +154,84 @@ class FirebaseServices {
       await addSingleItemToOrders(docData["id"], false);
       await removeProductFromCart(doc.id);
     }
+  }
+
+  Future updateDeviceTokenForUser(String token) async {
+    await FirebaseFirestore.instance
+        .collection("users")
+        .doc(FirebaseServices.getUserId())
+        .update({"device_token": token});
+  }
+
+  Future<String> createNewGroup(String groupName, String groupIconUrl) async {
+    final response = await FirebaseFirestore.instance
+        .collection('groups')
+        .add({'image': groupIconUrl, 'name': groupName});
+    final docId = response.id;
+    final currentUserDetails = await getUserDetails();
+    await FirebaseFirestore.instance
+        .collection('groups')
+        .doc(docId)
+        .collection('members')
+        .add({
+      'is_admin': true,
+      'image_url': currentUserDetails!['image'],
+      'name': currentUserDetails['username'],
+      'uid': getUserId(),
+    });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(getUserId())
+        .collection('groups')
+        .doc(docId)
+        .set({'image': groupIconUrl, 'name': groupName});
+    return docId;
+  }
+
+  Future sendInvites(List<String> deviceTokens, String groupName,
+      String groupId, String groupIcon, String senderName) async {
+    for (var deviceToken in deviceTokens) {
+      await NotificationServices().sendTokenNotification(deviceToken,
+          "Group Invite for $groupName", "Click to perform action", {
+        'group_id': groupId,
+        'group_name': groupName,
+        'group_icon': groupIcon,
+        'sender_name': senderName,
+      });
+    }
+  }
+
+  Future<String> uploadFile({required File parcel}) async {
+    try {
+      final fileName = parcel.path.split('/').last;
+      Reference destination =
+          FirebaseStorage.instance.ref().child('group_icons/$fileName');
+      await destination.putFile(parcel);
+      return await destination.getDownloadURL();
+    } on FirebaseException catch (e) {
+      Fluttertoast.showToast(msg: e.toString());
+      return '';
+    }
+  }
+
+  Future acceptInvite(
+      String groupId, String groupName, String groupIcon) async {
+    final userDetails = await getUserDetails();
+    await FirebaseFirestore.instance
+        .collection('groups')
+        .doc(groupId)
+        .collection('members')
+        .add({
+      'is_admin': false,
+      'image_url': userDetails!['image'],
+      'name': userDetails['username'],
+      'uid': getUserId(),
+    });
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(getUserId())
+        .collection('groups')
+        .doc(groupId)
+        .set({'image': groupIcon, 'name': groupName});
   }
 }
