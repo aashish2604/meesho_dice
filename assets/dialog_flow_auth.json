@@ -1,13 +1,3 @@
 {
-  "type": "service_account",
-  "project_id": "meesho-dice-chatbot-kmnh",
-  "private_key_id": "e16efe319908b23ba7be77fa1193106e2bc1d041",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQC7NKVchTDNEBUI\nrKrildn59bAfTYSxSouHoyu+z19mHF8S6JBeP0lozvQM5n8nZ5sx6z55JKLbi/VR\neQ72Lqyd3AJDy7h3i/fLv9UuShgYRFt6F7/NocoxPqXC+f/V5WwJkGQrLOWaZa9V\nrIbFcHFficzaBxkou4H0km+Gi0dg5HP0ZLMkeaVvfSHcxmsXTCZngqrAwtmWASbZ\nDB1l0O5NDPzuRZ9M1OlVh6bsJh+/Q6wVrmnudD4WVo2SwSqFXhamgu63lwj43CH2\n542srx4LYI0VFWubvjt9Tx4nzSpNPBW0Z2aRFYX/zzs5CXy1xf+KXycjISR614Gj\n9+kI596LAgMBAAECggEAXX6I+YCRY1CdWKQ3ggs5/lK8P53s38htj/OnhNe3et0/\nhEd+1nr/9CarjwfMyEa/pPoqTMFFzqUDA0oU9VFRJ1O6E9baDWZrfqgTVVdu2ivF\njd/vjEi5nMd/bLWDlnVKdCpXRJLbJrWTEBQmiNPD42WEV/1EjOm8mQNLTKQhpVsH\nybjpFBie7RNJR69aFzkaU6qFm4mPlWHrNdTWiMNOfhKWjg/gj2qlUsLhOOr8pMSd\nne/Gv64eswTc1Q734fXvXfW3p21xKiXCa0pCbH0IyzUKQ9RkoXQMJL1I6Ty1XDiw\n9Dr1l6Ez8RGgxdQ7qg2UGSvDwvEmf+ry1aTlqbNx1QKBgQDtLsM0dU3q1amHcgiy\nrkTrK9RVgMgX5Jjlbt8/YZDxazV9gue4K9mTkYNUZcxLMo3aenHHAzvEp7Z6BNcL\nJeF+MpXqb4VO6xn2C6cu/aY9xOvUzP2OcnIPew8uza+CC0ugJ+iTvzfUkAjHXCKw\npXGaq/d7gdqCCQ2JgCnc4pVDTQKBgQDKDtaLn/Le5hGD2C+FMt/6ojes8I0mVwHE\nM/3lhj9kMlnsX/y0aIjiwYIubi5Urr1FBPHRoP39igz8wmTldal08LtphXCDo6M7\nuMg6Ds8EwqlwyGgjwkmjEo7bLCj0X2D7KcwUzwVE424yUslScSBES1zdmYCIhg8C\n3MLFO1mNNwKBgQCJuEt0nGB/6Uyk7xwJ1JMEEtEaTMrixMPbBQPwY5Cr/dpzZJ10\nHVIbE7U0Pl/fkh04LTz/l+sOh2u3cjQDrx0+D9Vo6RR4/J54dc+/w1zSJRPi3pyk\nJ+P/BS+Nt7UfR7vD5ShxEekzLedLCz7BX2+VpiDvwDjGpMcNfjPQpGiTSQKBgQCX\n/1l9ZzE4ZDHA0JvOw1qiG+1t9vb3ZHQ7uDDCvJ5rLUVf/0UGIaz3h0H603+ezGQs\ny29tloH6fCMQ8NsdkcmL4pvY4Tymii58+qAErKcmmZkE8n0EiV8DgS5dyXZ1flpi\nFisjbCg2ji+TQ5uWnOr89QRC3vpFuTMJoDAUVnUjOQKBgH5mor+uZKyLkvmrp4/X\nCJLhm6lF3dLHHIVFFeNF1opMmYz6BzYGrRotkntdZajEqT7DcJWIhmD0h+jVmO6z\nmcfkIpx10D7zh0eaQCLl6wsjOuv6yjkcYwli9px/ygXKVQBAY7oIxj90EWtaCDjq\nU5vGdZ1EG8XNEJU83PuNBMNu\n-----END PRIVATE KEY-----\n",
-  "client_email": "meesho-dice-chatbot-996@meesho-dice-chatbot-kmnh.iam.gserviceaccount.com",
-  "client_id": "102298379487463329723",
-  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-  "token_uri": "https://oauth2.googleapis.com/token",
-  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
-  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/meesho-dice-chatbot-996%40meesho-dice-chatbot-kmnh.iam.gserviceaccount.com",
-  "universe_domain": "googleapis.com"
+  
 }
